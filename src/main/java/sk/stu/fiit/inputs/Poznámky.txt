@@ -1,0 +1,24 @@
+Hlavné okno:
+Načítanie údajov
+Zobrazenie času
+Ovládacie prvky - vytvorenie zákazníka
+                - vytvorenie rezervácie pre zákazníka
+                - Zrušenie rezervácie
+                - Ubytovanie na základe rezervácie alebo bez nej
+                - Zaznamenanie platby zákazníka
+                - Nezaplatené ukončené ubytovania
+                - História ubytovaní zákazníka
+                - História ubytovaní pre izbu
+Zľavy
+Vytváranie nových typov služieb
+Pridanie kategórie izueb
+Pridanie izby
+Editovať informácie o izbe
+Nesmú sa prekrývať ubytovania
+Zápúzdrené zložky
+Logovanie na výnimky
+Internacionalizácia
+
+Pre prácu s dátumom použite triedu java.util.Date. Pre konverziu medzi typmi Date a String
+môžete použiť triedy java.text.DateFormat a java.text.SimpleDateFormat. Nepoužívajte
+metódy označené ako deprecated.
