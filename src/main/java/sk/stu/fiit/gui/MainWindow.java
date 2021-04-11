@@ -624,13 +624,13 @@ public class MainWindow extends javax.swing.JFrame {
         customDate = false;
     }
 
-    private void updateAll() {
+    public void updateAll() {
         populateCustomersTbl();
         populateReservationsTbl();
         populateAccommTbl();
     }
     
-    public void deleteRows(DefaultTableModel model) {
+    private void deleteRows(DefaultTableModel model) {
         if (model.getRowCount() > 0) {
             for (int i = model.getRowCount() - 1; i > -1; i--) {
                 model.removeRow(i);
@@ -694,7 +694,7 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }
     
-    public int getRow(JTable table, String message) {
+    private int getRow(JTable table, String message) {
         int index = table.getSelectedRow();
 
         if (InputProcessor.isPositiveInt(index)) {

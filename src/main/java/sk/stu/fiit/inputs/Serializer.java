@@ -21,13 +21,13 @@ public class Serializer {
     
     public static void serialize(Hotel hotel) {
         try {
-            FileOutputStream fileOut = new FileOutputStream("Outputs/data.out");
+            FileOutputStream fileOut = new FileOutputStream("outputs/data.out");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(hotel);
             out.close();
             fileOut.close();
             System.out.println("Uspesne serializovane");
-            System.out.printf("Serialized data is saved in Outputs/data.out");
+            System.out.printf("Serialized data is saved in outputs/data.out");
         } catch (IOException i) {
             i.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class Serializer {
 
     public static Hotel deserialize() {
         try {
-            FileInputStream fileIn = new FileInputStream("Outputs/data.out");
+            FileInputStream fileIn = new FileInputStream("outputs/data.out");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Hotel hotel = (Hotel) in.readObject();
             in.close();

@@ -7,6 +7,7 @@ package sk.stu.fiit.inputs;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,7 +23,11 @@ import sk.stu.fiit.logic.*;
  */
 public class InputsCreator {
     
+    
+
+    
     public static void createInputs(Hotel hotel){
+        
         
         Customer c1 = new Customer("Arnošt Bublavý", "Cimenná 123", "+421000000000", "arnost@bublavy.com");
         Customer c2 = new Customer("Dobromila Ementálová", "Frankfurt 456", "+421111111111", "dobromila@ementalova.com");
@@ -53,15 +58,19 @@ public class InputsCreator {
         int size = 200;
                 
         try {
-            BufferedImage img1 = ImageIO.read(new File("images/room1-1.jpg"));
-            BufferedImage img2 = ImageIO.read(new File("images/room1-2.jpg"));
-            BufferedImage img3 = ImageIO.read(new File("images/room1-3.jpg"));
-            BufferedImage img4 = ImageIO.read(new File("images/room2-1.jpg"));
-            BufferedImage img5 = ImageIO.read(new File("images/room2-2.jpg"));
-            BufferedImage img6 = ImageIO.read(new File("images/room3-1.jpg"));
-            BufferedImage img7 = ImageIO.read(new File("images/room3-2.jpg"));
-            BufferedImage img8 = ImageIO.read(new File("images/room4-1.jpg"));
-            BufferedImage img9 = ImageIO.read(new File("images/room4-2.jpeg"));
+             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+//             InputStream is = classloader.getResourceAsStream("images/room1-1.jpg");
+//             BufferedImage img1 = ImageIO.read(is);
+
+            BufferedImage img1 = ImageIO.read(classloader.getResourceAsStream("images/room1-1.jpg"));
+            BufferedImage img2 = ImageIO.read(classloader.getResourceAsStream("images/room1-2.jpg"));
+            BufferedImage img3 = ImageIO.read(classloader.getResourceAsStream("images/room1-3.jpg"));
+            BufferedImage img4 = ImageIO.read(classloader.getResourceAsStream("images/room2-1.jpg"));
+            BufferedImage img5 = ImageIO.read(classloader.getResourceAsStream("images/room2-2.jpg"));
+            BufferedImage img6 = ImageIO.read(classloader.getResourceAsStream("images/room3-1.jpg"));
+            BufferedImage img7 = ImageIO.read(classloader.getResourceAsStream("images/room3-2.jpg"));
+            BufferedImage img8 = ImageIO.read(classloader.getResourceAsStream("images/room4-1.jpg"));
+            BufferedImage img9 = ImageIO.read(classloader.getResourceAsStream("images/room4-2.jpeg"));
             
             li1.add(InputProcessor.resize(img1, size));
             li1.add(InputProcessor.resize(img2, size));
@@ -73,8 +82,11 @@ public class InputsCreator {
             li4.add(InputProcessor.resize(img8, size));
             li4.add(InputProcessor.resize(img9, size));
             
+            System.out.println("++++++++++++++++Obrazky sa nacitali v poriadku");
+            
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("----------------Nacitanie obrazkov zlyhalo");
         }
 
         Room r1 = new Room("PR-001", "Pekná izba", cat1, li1);

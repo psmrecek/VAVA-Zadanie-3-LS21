@@ -50,10 +50,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <!--                Build an executable JAR -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
+                <version>3.1.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -65,7 +64,31 @@
 
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <!-- here the phase you need -->
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target/outputs</outputDirectory>
+                            <resources>          
+                                <resource>
+                                    <directory>outputs</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>              
+                        </configuration>            
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+        
     </build>
 
 <!--https://stackoverflow.com/questions/574594/how-can-i-create-an-executable-jar-with-dependencies-using-maven-->    
@@ -76,7 +99,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>sk.stu.fiit.MainWindow</mainClass>
+                            <mainClass>sk.stu.fiit.gui.MainWindow</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -90,7 +113,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>sk.stu.fiit.MainWindow</mainClass>
+                            <mainClass>sk.stu.fiit.gui.MainWindow</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -99,8 +122,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>  this is used for inheritance merges 
-                        <phase>package</phase>  bind to the packaging phase 
+                        <id>make-assembly</id>  
+                        <phase>package</phase>  
                         <goals>
                             <goal>single</goal>
                         </goals>
