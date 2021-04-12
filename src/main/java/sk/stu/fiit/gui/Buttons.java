@@ -54,12 +54,13 @@ public class Buttons extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("jLabel1");
+        jLabel1.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel1.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -68,6 +69,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("jLabel2");
+        jLabel2.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel2.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -76,6 +78,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("jLabel3");
+        jLabel3.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel3.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -84,6 +87,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("jLabel4");
+        jLabel4.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel4.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -92,6 +96,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("jLabel5");
+        jLabel5.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel5.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -100,6 +105,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("jLabel6");
+        jLabel6.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel6.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -108,6 +114,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("jLabel7");
+        jLabel7.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel7.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -116,6 +123,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("jLabel8");
+        jLabel8.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel8.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -124,6 +132,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("jLabel9");
+        jLabel9.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel9.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -132,6 +141,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("jLabel10");
+        jLabel10.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel10.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -140,6 +150,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField1.setText("jTextField1");
+        jTextField1.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField1.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -148,6 +159,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField2.setText("jTextField2");
+        jTextField2.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField2.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -156,6 +168,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField3.setText("jTextField3");
+        jTextField3.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField3.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -164,6 +177,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField4.setText("jTextField4");
+        jTextField4.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField4.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -172,6 +186,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField5.setText("jTextField5");
+        jTextField5.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField5.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -180,6 +195,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField6.setText("jTextField6");
+        jTextField6.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField6.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -188,6 +204,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField7.setText("jTextField7");
+        jTextField7.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField7.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -196,6 +213,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField8.setText("jTextField8");
+        jTextField8.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField8.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -204,6 +222,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField9.setText("jTextField9");
+        jTextField9.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField9.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -212,6 +231,7 @@ public class Buttons extends javax.swing.JFrame {
 
         jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextField10.setText("jTextField10");
+        jTextField10.setMinimumSize(new java.awt.Dimension(200, 26));
         jTextField10.setPreferredSize(new java.awt.Dimension(200, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;

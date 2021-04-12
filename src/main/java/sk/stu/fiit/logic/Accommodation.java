@@ -13,6 +13,7 @@ import java.util.Date;
 public class Accommodation implements Serializable {
 
     private Payment payment;
+    private boolean paid = false;
     private ArrayList<Service> listServices = new ArrayList<>();
     private Customer customer;
     private Room room;
@@ -43,6 +44,7 @@ public class Accommodation implements Serializable {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+        this.paid = true;
     }
 
     public ArrayList<Service> getListServices() {

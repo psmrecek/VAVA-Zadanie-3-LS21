@@ -19,7 +19,8 @@ public class Hotel implements Serializable {
     private ArrayList<Customer> listCustomers = new ArrayList<>();
     private ArrayList<Service> listServices = new ArrayList<>();;
     private ArrayList<Category> listCategories = new ArrayList<>();;
-    private ArrayList<Accommodation> listAccommodations = new ArrayList<>();;
+    private ArrayList<Accommodation> listAccommodationsUnpaid = new ArrayList<>();
+    private ArrayList<Accommodation> listAccommodationsPaid = new ArrayList<>();
     private ArrayList<Reservation> listReservations = new ArrayList<>();;
     
     public Hotel(){
@@ -39,7 +40,7 @@ public class Hotel implements Serializable {
     }
     
     public void addAccommodation(Accommodation accommodation){
-        listAccommodations.add(accommodation);
+        listAccommodationsUnpaid.add(accommodation);
     }
         
     public void addReservation(Reservation reservation) {
@@ -71,12 +72,12 @@ public class Hotel implements Serializable {
         this.listCategories = listCategories;
     }
 
-    public ArrayList<Accommodation> getListAccommodations() {
-        return listAccommodations;
+    public ArrayList<Accommodation> getListAccommodationsUnpaid() {
+        return listAccommodationsUnpaid;
     }
 
-    public void setListAccommodations(ArrayList<Accommodation> listAccommodations) {
-        this.listAccommodations = listAccommodations;
+    public void setListAccommodationsUnpaid(ArrayList<Accommodation> listAccommodationsUnpaid) {
+        this.listAccommodationsUnpaid = listAccommodationsUnpaid;
     }
 
     public ArrayList<Reservation> getListReservations() {
@@ -85,5 +86,18 @@ public class Hotel implements Serializable {
 
     public void setListReservations(ArrayList<Reservation> listReservations) {
         this.listReservations = listReservations;
+    }
+
+    public ArrayList<Accommodation> getListAccommodationsPaid() {
+        return listAccommodationsPaid;
+    }
+
+    public void setListAccommodationsPaid(ArrayList<Accommodation> listAccommodationsPaid) {
+        this.listAccommodationsPaid = listAccommodationsPaid;
+    }
+    
+    public void setPaidAccomm(Accommodation accommodation){
+        listAccommodationsUnpaid.remove(accommodation);
+        listAccommodationsPaid.add(accommodation);
     }
 }//end Hotel

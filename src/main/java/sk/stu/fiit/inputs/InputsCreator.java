@@ -39,9 +39,9 @@ public class InputsCreator {
         hotel.addCustomer(c3);
         hotel.addCustomer(c4);
         
-        Service s1 = new Service("Plávanie", "20.00");
-        Service s2 = new Service("Masáž", "40.00");
-        Service s3 = new Service("Jazda na koni", "30.00");
+        Service s1 = new Service("Plávanie", 20.00);
+        Service s2 = new Service("Masáž", 40.00);
+        Service s3 = new Service("Jazda na koni", 30.00);
         
         hotel.addService(s1);
         hotel.addService(s2);
@@ -105,7 +105,7 @@ public class InputsCreator {
             Accommodation ac3 = new Accommodation(c2, r3, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
             Accommodation ac4 = new Accommodation(c3, r4, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
             Accommodation ac5 = new Accommodation(c1, r1, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Accommodation ac6 = new Accommodation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.1.2021 10:00"));
+            Accommodation ac6 = new Accommodation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.4.2021 10:00"));
             
             ac1.addService(s1);
             ac2.addService(s2);
@@ -129,7 +129,7 @@ public class InputsCreator {
             Reservation res3 = new Reservation(c2, r3, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
             Reservation res4 = new Reservation(c3, r4, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
             Reservation res5 = new Reservation(c1, r1, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Reservation res6 = new Reservation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.1.2021 10:00"));
+            Reservation res6 = new Reservation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.4.2021 10:00"));
             
             hotel.addReservation(res1);
             hotel.addReservation(res2);

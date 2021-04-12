@@ -33,6 +33,9 @@ public class MainWindow extends javax.swing.JFrame {
     private SimpleDateFormat sdfTimeDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
     private SimpleDateFormat sdfRoom = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     private Hotel hotel;
+    private Date currentDateApp;
+    private Date realDateApp;
+    long diffInMillies = 0;
     
     /**
      * Creates new form MainWindow
@@ -216,12 +219,19 @@ public class MainWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Zákazník", "Izba", "Od", "Do"
+                "Zákazník", "Izba", "Od", "Do", "Prepadnutá"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -229,6 +239,9 @@ public class MainWindow extends javax.swing.JFrame {
         });
         reservationsTbl.getTableHeader().setReorderingAllowed(false);
         reservationsScroll.setViewportView(reservationsTbl);
+        if (reservationsTbl.getColumnModel().getColumnCount() > 0) {
+            reservationsTbl.getColumnModel().getColumn(4).setMaxWidth(100);
+        }
 
         controlsPnl.add(reservationsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1190, 200));
 
@@ -547,20 +560,35 @@ public class MainWindow extends javax.swing.JFrame {
                 while (behCyklus == 1) {
                     
                     if (customDate) {
-                        Date date = customCalendar.getTime();
-                        dateLbl.setText(sdfTimeDate.format(date));
+//                        currentDateApp = customCalendar.getTime();
+//                        dateLbl.setText(sdfTimeDate.format(getCurrentDateApp()));
+//
+//                        try {
+//                            Thread.sleep(1000);
+//                            customCalendar.setTimeInMillis(customCalendar.getTimeInMillis() + 1000);
+////                        System.out.println("Spal som 1000");
+//                        } catch (InterruptedException ex) {
+//                            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+                        Calendar realCalendar = new GregorianCalendar();
+                        realDateApp = realCalendar.getTime();
+                        Date millis = new Date(realCalendar.getTimeInMillis() + diffInMillies);
+                        currentDateApp = millis;
+                        
+                        dateLbl.setText(sdfTimeDate.format(currentDateApp));
 
                         try {
-                            Thread.sleep(1000);
-                            customCalendar.setTimeInMillis(customCalendar.getTimeInMillis() + 1000);
+                            Thread.sleep(100);
 //                        System.out.println("Spal som 1000");
                         } catch (InterruptedException ex) {
                             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
                     } else {
                         Calendar realCalendar = new GregorianCalendar();
-                        Date date = realCalendar.getTime();
-                        dateLbl.setText(sdfTimeDate.format(date));
+                        currentDateApp = realCalendar.getTime();
+                        realDateApp = currentDateApp;
+                        dateLbl.setText(sdfTimeDate.format(currentDateApp));
                         
                         try {
                             Thread.sleep(100);
@@ -603,7 +631,14 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addPaymentAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int accommTableIndex = getRow(accommTbl, "Nie je vybraný žiadne nezaplatené ubytovanie z tabuľky!");
+        if (accommTableIndex == -1) {
+            return;
+        }
+        
+        Accommodation accommodation = hotel.getListAccommodationsUnpaid().get(accommTableIndex);
+        
+        new AddPaymentWindow(this, accommodation).setVisible(true);
     }
 
     private void customerHistoryAction() {
@@ -612,7 +647,7 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         
-        new CustomerHistoriWindow(hotel.getListCustomers().get(customerTableIndex)).setVisible(true);
+        new CustomerHistoryWindow(hotel.getListCustomers().get(customerTableIndex)).setVisible(true);
     }
 
     private void roomShowAction() {
@@ -620,7 +655,23 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void changeDateAction() {
-        setCustomTimeDate();
+//        setCustomTimeDate();
+        String dateString = JOptionPane.showInputDialog(rootPane,
+                "Zadajte dátum vo formáte dd.MM.yyyy HH:mm:ss",
+                "Vlastný dátum", JOptionPane.QUESTION_MESSAGE);
+        Date inputDate;
+        try {
+            inputDate = sdfTimeDate.parse(dateString);
+            diffInMillies = inputDate.getTime() - realDateApp.getTime();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Nesprávny formát dátumu",
+                    "Chyba!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        customDate = true;
+        updateAll();
     }
 
     private void saveAction() {
@@ -681,12 +732,20 @@ public class MainWindow extends javax.swing.JFrame {
         ArrayList<Reservation> list = hotel.getListReservations();
 
         for (int i = 0; i < list.size(); i++) {
-
+            Date compareDate = getCurrentDateApp();
+            Date start = list.get(i).getStartDate();
+            Date end = list.get(i).getEndDate();
+            
             rowData[0] = list.get(i).getCustomer().getName();
             rowData[1] = list.get(i).getRoom().getName();
-            rowData[2] = sdfRoom.format(list.get(i).getStartDate());
-            rowData[3] = sdfRoom.format(list.get(i).getEndDate());
-
+            rowData[2] = sdfRoom.format(start);
+            rowData[3] = sdfRoom.format(end);
+            
+            if (end.after(compareDate)) {
+                rowData[4] = false;
+            } else {
+                rowData[4] = true;
+            }
             model.addRow(rowData);
         }
     }
@@ -697,7 +756,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         int numberOfColumns = accommTbl.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
-        ArrayList<Accommodation> list = hotel.getListAccommodations();
+        ArrayList<Accommodation> list = hotel.getListAccommodationsUnpaid();
 
         for (int i = 0; i < list.size(); i++) {
 
@@ -726,4 +785,18 @@ public class MainWindow extends javax.swing.JFrame {
     private void addRoomOrCategoryAction() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public Date getCurrentDateApp() {
+        try {
+            Thread.sleep(150);
+        } catch (InterruptedException ex) {
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return currentDateApp;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+   
 }

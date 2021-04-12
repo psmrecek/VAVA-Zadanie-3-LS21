@@ -11,18 +11,18 @@ import java.io.Serializable;
 public class Service implements Serializable {
 
     private String description;
-    private String price;
+    private double price;
 
-    public Service(String description, String price) {
+    public Service(String description, double price) {
         this.description = description;
         this.price = price;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
