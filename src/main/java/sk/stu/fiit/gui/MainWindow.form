@@ -119,7 +119,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="controlsPnl" alignment="0" pref="1116" max="32767" attributes="0"/>
+          <Component id="controlsPnl" alignment="0" pref="1218" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -138,7 +138,7 @@
         <Container class="javax.swing.JPanel" name="buttonsPnl">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="710" width="1090" height="40"/>
+              <AbsoluteConstraints x="10" y="710" width="1190" height="40"/>
             </Constraint>
           </Constraints>
 
@@ -210,15 +210,26 @@
                 <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerHistoryBtnMouseReleased"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="manageBtn">
+            <Component class="javax.swing.JButton" name="roomShowBtn">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Mana&#x17e;ment izieb"/>
+                <Property name="text" type="java.lang.String" value="Zobrazova&#x10d; izieb"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="manageBtnMouseReleased"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="roomShowBtnMouseReleased"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="addRoomOrCategoryBtn">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Vytvori&#x165; kateg&#xf3;riu alebo izbu"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addRoomOrCategoryBtnMouseReleased"/>
               </Events>
             </Component>
           </SubComponents>
@@ -241,7 +252,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="70" width="1090" height="200"/>
+              <AbsoluteConstraints x="10" y="70" width="1190" height="200"/>
             </Constraint>
           </Constraints>
 
@@ -303,7 +314,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="280" width="1090" height="200"/>
+              <AbsoluteConstraints x="10" y="280" width="1190" height="200"/>
             </Constraint>
           </Constraints>
 
@@ -371,7 +382,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="10" y="490" width="1090" height="200"/>
+              <AbsoluteConstraints x="10" y="490" width="1190" height="200"/>
             </Constraint>
           </Constraints>
 
@@ -436,7 +447,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="20" y="20" width="280" height="50"/>
+              <AbsoluteConstraints x="20" y="10" width="280" height="50"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -446,7 +457,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="670" y="20" width="430" height="50"/>
+              <AbsoluteConstraints x="770" y="10" width="430" height="50"/>
             </Constraint>
           </Constraints>
 

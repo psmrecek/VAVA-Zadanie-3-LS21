@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Category implements Serializable {
+public class Category implements Serializable, IName {
 
     private ArrayList<Room> listRooms = new ArrayList<>();
     private String name;

@@ -10,9 +10,9 @@ import javax.swing.ImageIcon;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Room implements Serializable {
+public class Room implements Serializable, IName{
     
-    private String id;
+    private String name;
     private String note;
     private Category category;
     private ArrayList<ImageIcon> listImages;
@@ -20,7 +20,7 @@ public class Room implements Serializable {
     private ArrayList<Accommodation> listAccommodations = new ArrayList<>();
 
     public Room(String id, String note, Category category, ArrayList<ImageIcon> listImages) {
-        this.id = id;
+        this.name = id;
         this.note = note;
         this.category = category;
         this.listImages = listImages;
@@ -44,12 +44,12 @@ public class Room implements Serializable {
         this.listAccommodations = listAccommodations;
     }
 
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNote() {

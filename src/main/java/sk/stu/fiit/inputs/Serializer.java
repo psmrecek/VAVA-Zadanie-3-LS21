@@ -27,7 +27,7 @@ public class Serializer {
             out.close();
             fileOut.close();
             System.out.println("Uspesne serializovane");
-            System.out.printf("Serialized data is saved in outputs/data.out");
+            System.out.println("Serialized data is saved in outputs/data.out");
         } catch (IOException i) {
             i.printStackTrace();
         }

@@ -51,4 +51,14 @@ public final class InputProcessor {
 
     }
     
+    public static boolean emptyString(String string) {
+        boolean result;
+
+        try {
+            result = string.length() == 0;
+            return result;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

@@ -293,7 +293,7 @@ public class CustomerHistoriWindow extends javax.swing.JFrame {
         ArrayList<Accommodation> list = customer.getListAccommodations();
         for (int i = 0; i < list.size(); i++) {
 
-            rowData[0] = list.get(i).getRoom().getId();
+            rowData[0] = list.get(i).getRoom().getName();
             rowData[1] = sdfRoom.format(list.get(i).getStartDate());
             rowData[2] = sdfRoom.format(list.get(i).getEndDate());
             rowData[3] = list.get(i).getServicesString();

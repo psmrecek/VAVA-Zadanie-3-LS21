@@ -72,7 +72,8 @@ public class MainWindow extends javax.swing.JFrame {
         addAccommBtn = new javax.swing.JButton();
         addPaymentBtn = new javax.swing.JButton();
         customerHistoryBtn = new javax.swing.JButton();
-        manageBtn = new javax.swing.JButton();
+        roomShowBtn = new javax.swing.JButton();
+        addRoomOrCategoryBtn = new javax.swing.JButton();
         customersScroll = new javax.swing.JScrollPane();
         customersTbl = new javax.swing.JTable();
         reservationsScroll = new javax.swing.JScrollPane();
@@ -161,16 +162,25 @@ public class MainWindow extends javax.swing.JFrame {
         });
         buttonsPnl.add(customerHistoryBtn);
 
-        manageBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        manageBtn.setText("Manažment izieb");
-        manageBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        roomShowBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        roomShowBtn.setText("Zobrazovač izieb");
+        roomShowBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                manageBtnMouseReleased(evt);
+                roomShowBtnMouseReleased(evt);
             }
         });
-        buttonsPnl.add(manageBtn);
+        buttonsPnl.add(roomShowBtn);
 
-        controlsPnl.add(buttonsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 710, 1090, 40));
+        addRoomOrCategoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addRoomOrCategoryBtn.setText("Vytvoriť kategóriu alebo izbu");
+        addRoomOrCategoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addRoomOrCategoryBtnMouseReleased(evt);
+            }
+        });
+        buttonsPnl.add(addRoomOrCategoryBtn);
+
+        controlsPnl.add(buttonsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 710, 1190, 40));
 
         customersScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka zákazníkov", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         customersScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -195,7 +205,7 @@ public class MainWindow extends javax.swing.JFrame {
         customersTbl.getTableHeader().setReorderingAllowed(false);
         customersScroll.setViewportView(customersTbl);
 
-        controlsPnl.add(customersScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1090, 200));
+        controlsPnl.add(customersScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1190, 200));
 
         reservationsScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka rezervácií", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         reservationsScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -220,7 +230,7 @@ public class MainWindow extends javax.swing.JFrame {
         reservationsTbl.getTableHeader().setReorderingAllowed(false);
         reservationsScroll.setViewportView(reservationsTbl);
 
-        controlsPnl.add(reservationsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1090, 200));
+        controlsPnl.add(reservationsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1190, 200));
 
         accommScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka ubytovaní", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         accommScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -255,11 +265,11 @@ public class MainWindow extends javax.swing.JFrame {
             accommTbl.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        controlsPnl.add(accommScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 1090, 200));
+        controlsPnl.add(accommScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 1190, 200));
 
         dateLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dateLbl.setText("Dátum");
-        controlsPnl.add(dateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 280, 50));
+        controlsPnl.add(dateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 280, 50));
 
         settingsPnl.setAlignmentX(1.0F);
         settingsPnl.setLayout(new javax.swing.BoxLayout(settingsPnl, javax.swing.BoxLayout.LINE_AXIS));
@@ -300,7 +310,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         settingsPnl.add(loadBtn);
 
-        controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 430, 50));
+        controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 430, 50));
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -369,7 +379,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(controlsPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1116, Short.MAX_VALUE)
+            .addComponent(controlsPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1218, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -413,10 +423,10 @@ public class MainWindow extends javax.swing.JFrame {
         customerHistoryAction();
     }//GEN-LAST:event_customerHistoryBtnMouseReleased
 
-    private void manageBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageBtnMouseReleased
+    private void roomShowBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomShowBtnMouseReleased
         // TODO add your handling code here:
-        manageAction();
-    }//GEN-LAST:event_manageBtnMouseReleased
+        roomShowAction();
+    }//GEN-LAST:event_roomShowBtnMouseReleased
 
     private void changeDateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeDateBtnMouseReleased
         // TODO add your handling code here:
@@ -437,6 +447,11 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         currentDateAction();
     }//GEN-LAST:event_currentDateBtnMouseReleased
+
+    private void addRoomOrCategoryBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomOrCategoryBtnMouseReleased
+        // TODO add your handling code here:
+        addRoomOrCategoryAction();
+    }//GEN-LAST:event_addRoomOrCategoryBtnMouseReleased
 
     /**
      * @param args the command line arguments
@@ -481,6 +496,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton addCustomerBtn;
     private javax.swing.JButton addPaymentBtn;
     private javax.swing.JButton addReservationBtn;
+    private javax.swing.JButton addRoomOrCategoryBtn;
     private javax.swing.JPanel buttonsPnl;
     private javax.swing.JButton cancelReservationBtn;
     private javax.swing.JButton changeDateBtn;
@@ -499,12 +515,12 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JButton loadBtn;
-    private javax.swing.JButton manageBtn;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JScrollPane reservationsScroll;
     private javax.swing.JTable reservationsTbl;
+    private javax.swing.JButton roomShowBtn;
     private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JButton saveBtn;
     private javax.swing.JMenuItem saveMenuItem;
@@ -571,7 +587,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addCustomerAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new AddCustomerWindow(this, hotel).setVisible(true);
     }
 
     private void addReservationAction() {
@@ -599,8 +615,8 @@ public class MainWindow extends javax.swing.JFrame {
         new CustomerHistoriWindow(hotel.getListCustomers().get(customerTableIndex)).setVisible(true);
     }
 
-    private void manageAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private void roomShowAction() {
+        new HotelManagementWindow(hotel).setVisible(true);
     }
 
     private void changeDateAction() {
@@ -667,7 +683,7 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
 
             rowData[0] = list.get(i).getCustomer().getName();
-            rowData[1] = list.get(i).getRoom().getId();
+            rowData[1] = list.get(i).getRoom().getName();
             rowData[2] = sdfRoom.format(list.get(i).getStartDate());
             rowData[3] = sdfRoom.format(list.get(i).getEndDate());
 
@@ -686,7 +702,7 @@ public class MainWindow extends javax.swing.JFrame {
         for (int i = 0; i < list.size(); i++) {
 
             rowData[0] = list.get(i).getCustomer().getName();
-            rowData[1] = list.get(i).getRoom().getId();
+            rowData[1] = list.get(i).getRoom().getName();
             rowData[2] = sdfRoom.format(list.get(i).getStartDate());
             rowData[3] = sdfRoom.format(list.get(i).getEndDate());
 
@@ -705,5 +721,9 @@ public class MainWindow extends javax.swing.JFrame {
                     "Chyba!", JOptionPane.ERROR_MESSAGE);
         }
         return -1;
+    }
+
+    private void addRoomOrCategoryAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -50,6 +50,9 @@ public class InputsCreator {
         Category cat1 = new Category("Premium", "Izby pre 4 ľudí", 120.43);
         Category cat2 = new Category("Kráľovské izby", "Izby pre 16 ľudí s osobnými stajňami pri hoteli", 12345.67);
         
+        hotel.addCategory(cat1);
+        hotel.addCategory(cat2);
+        
         ArrayList<ImageIcon> li1 = new ArrayList<>();
         ArrayList<ImageIcon> li2 = new ArrayList<>();
         ArrayList<ImageIcon> li3 = new ArrayList<>();
