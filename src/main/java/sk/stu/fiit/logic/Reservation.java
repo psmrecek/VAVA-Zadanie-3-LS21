@@ -9,7 +9,7 @@ import java.util.Date;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Reservation implements Serializable {
+public class Reservation implements Serializable, IDates {
 
     private Customer customer;
     private Room room;

@@ -8,13 +8,13 @@ import java.io.Serializable;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Service implements Serializable {
+public class Service implements Serializable, IName {
 
-    private String description;
+    private String name;
     private double price;
 
     public Service(String description, double price) {
-        this.description = description;
+        this.name = description;
         this.price = price;
     }
 
@@ -26,12 +26,12 @@ public class Service implements Serializable {
         this.price = price;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
     
 }//end Service

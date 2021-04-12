@@ -15,7 +15,7 @@ public class Room implements Serializable, IName{
     private String name;
     private String note;
     private Category category;
-    private ArrayList<ImageIcon> listImages;
+    private ArrayList<ImageIcon> listImages = new ArrayList<>();
     private ArrayList<Reservation> listReservations = new ArrayList<>();
     private ArrayList<Accommodation> listAccommodations = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class Room implements Serializable, IName{
         this.name = id;
         this.note = note;
         this.category = category;
-        this.listImages = listImages;
+        this.listImages.addAll(listImages);
         
         category.addRoom(this);
     }

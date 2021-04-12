@@ -73,6 +73,7 @@ public class MainWindow extends javax.swing.JFrame {
         addReservationBtn = new javax.swing.JButton();
         cancelReservationBtn = new javax.swing.JButton();
         addAccommBtn = new javax.swing.JButton();
+        addService = new javax.swing.JButton();
         addPaymentBtn = new javax.swing.JButton();
         customerHistoryBtn = new javax.swing.JButton();
         roomShowBtn = new javax.swing.JButton();
@@ -147,6 +148,15 @@ public class MainWindow extends javax.swing.JFrame {
         });
         buttonsPnl.add(addAccommBtn);
 
+        addService.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        addService.setText("Využiť službu");
+        addService.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                addServiceMouseReleased(evt);
+            }
+        });
+        buttonsPnl.add(addService);
+
         addPaymentBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         addPaymentBtn.setText("Zaznamenať platbu");
         addPaymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,7 +185,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(roomShowBtn);
 
         addRoomOrCategoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addRoomOrCategoryBtn.setText("Vytvoriť kategóriu alebo izbu");
+        addRoomOrCategoryBtn.setText("Pridať službu, kategóriu alebo izbu");
         addRoomOrCategoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addRoomOrCategoryBtnMouseReleased(evt);
@@ -183,7 +193,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         buttonsPnl.add(addRoomOrCategoryBtn);
 
-        controlsPnl.add(buttonsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 710, 1190, 40));
+        controlsPnl.add(buttonsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 710, 1320, 40));
 
         customersScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka zákazníkov", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         customersScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -208,7 +218,7 @@ public class MainWindow extends javax.swing.JFrame {
         customersTbl.getTableHeader().setReorderingAllowed(false);
         customersScroll.setViewportView(customersTbl);
 
-        controlsPnl.add(customersScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1190, 200));
+        controlsPnl.add(customersScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1320, 200));
 
         reservationsScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka rezervácií", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         reservationsScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -243,7 +253,7 @@ public class MainWindow extends javax.swing.JFrame {
             reservationsTbl.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        controlsPnl.add(reservationsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1190, 200));
+        controlsPnl.add(reservationsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1320, 200));
 
         accommScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka ubytovaní", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         accommScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -278,7 +288,7 @@ public class MainWindow extends javax.swing.JFrame {
             accommTbl.getColumnModel().getColumn(4).setMaxWidth(100);
         }
 
-        controlsPnl.add(accommScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 1190, 200));
+        controlsPnl.add(accommScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 1320, 200));
 
         dateLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         dateLbl.setText("Dátum");
@@ -323,7 +333,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         settingsPnl.add(loadBtn);
 
-        controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 10, 430, 50));
+        controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 430, 50));
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("File");
@@ -392,7 +402,7 @@ public class MainWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(controlsPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1218, Short.MAX_VALUE)
+            .addComponent(controlsPnl, javax.swing.GroupLayout.DEFAULT_SIZE, 1342, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,6 +476,11 @@ public class MainWindow extends javax.swing.JFrame {
         addRoomOrCategoryAction();
     }//GEN-LAST:event_addRoomOrCategoryBtnMouseReleased
 
+    private void addServiceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addServiceMouseReleased
+        // TODO add your handling code here:
+        addServiceAction();
+    }//GEN-LAST:event_addServiceMouseReleased
+
     /**
      * @param args the command line arguments
      */
@@ -510,6 +525,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton addPaymentBtn;
     private javax.swing.JButton addReservationBtn;
     private javax.swing.JButton addRoomOrCategoryBtn;
+    private javax.swing.JButton addService;
     private javax.swing.JPanel buttonsPnl;
     private javax.swing.JButton cancelReservationBtn;
     private javax.swing.JButton changeDateBtn;
@@ -783,7 +799,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addRoomOrCategoryAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new AddCategoryRoomServiceWindow(hotel).setVisible(true);
     }
 
     public Date getCurrentDateApp() {
@@ -797,6 +813,17 @@ public class MainWindow extends javax.swing.JFrame {
 
     public Hotel getHotel() {
         return hotel;
+    }
+
+    private void addServiceAction() {
+        int accommTableIndex = getRow(accommTbl, "Nie je vybraný žiadne nezaplatené ubytovanie z tabuľky!");
+        if (accommTableIndex == -1) {
+            return;
+        }
+
+        Accommodation accommodation = hotel.getListAccommodationsUnpaid().get(accommTableIndex);
+
+        new AddServiceWindow(accommodation, hotel).setVisible(true);
     }
    
 }

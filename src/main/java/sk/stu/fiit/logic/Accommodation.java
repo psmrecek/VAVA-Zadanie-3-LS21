@@ -10,7 +10,7 @@ import java.util.Date;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Accommodation implements Serializable {
+public class Accommodation implements Serializable, IDates {
 
     private Payment payment;
     private boolean paid = false;
@@ -86,7 +86,7 @@ public class Accommodation implements Serializable {
     public String getServicesString() {
         ArrayList<String> strings = new ArrayList<>();
         for (int i = 0; i < listServices.size(); i++) {
-            strings.add(listServices.get(i).getDescription());
+            strings.add(listServices.get(i).getName());
         }
         return String.join(", ", strings);
     }

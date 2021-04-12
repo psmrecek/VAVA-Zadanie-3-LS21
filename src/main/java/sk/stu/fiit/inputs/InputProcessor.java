@@ -7,7 +7,9 @@ package sk.stu.fiit.inputs;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import sk.stu.fiit.logic.IName;
 
 /**
  *
@@ -60,5 +62,31 @@ public final class InputProcessor {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    public static double validPriceFromString(String priceString) throws Exception {
+        double price;
+
+        try {
+            priceString = priceString.replace(",", ".");
+            price = Double.parseDouble(priceString);
+            if (price >= 0.0) {
+                return price;
+            }
+        } catch (Exception e) {
+            
+        }
+
+        throw new Exception("Wrong price format");
+        
+    }
+    
+    public static ArrayList<String> getListOfNames(ArrayList<? extends IName> list) {
+        ArrayList<String> listOfNames = new ArrayList<>();
+
+        for (IName iname : list) {
+            listOfNames.add(iname.getName());
+        }
+        return listOfNames;
     }
 }

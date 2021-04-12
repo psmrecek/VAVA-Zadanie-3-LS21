@@ -446,18 +446,9 @@ public class HotelManagementWindow extends javax.swing.JFrame {
     private javax.swing.JLabel titleLbl;
     // End of variables declaration//GEN-END:variables
     
-    private ArrayList<String> getListOfNames(ArrayList<? extends IName> list) {
-        ArrayList<String> listOfNames = new ArrayList<>();
-        
-        for (IName  iname : list) {
-            listOfNames.add(iname.getName());
-        }
-        return listOfNames;
-    }
-    
     private void refreshCategories(){
         listCategories = hotel.getListCategories();
-        listCategoriesNames = getListOfNames(listCategories);
+        listCategoriesNames = InputProcessor.getListOfNames(listCategories);
         categoryCb.setModel(new DefaultComboBoxModel<String>(listCategoriesNames.toArray(new String[0])));
         
         refrehRooms();
@@ -489,7 +480,7 @@ public class HotelManagementWindow extends javax.swing.JFrame {
         Category category = listCategories.get(index);
         
         listRooms = category.getListRooms();
-        listRoomNames = getListOfNames(listRooms);
+        listRoomNames = InputProcessor.getListOfNames(listRooms);
         roomCb.setModel(new DefaultComboBoxModel<String>(listRoomNames.toArray(new String[0])));
     }
 
@@ -531,6 +522,10 @@ public class HotelManagementWindow extends javax.swing.JFrame {
             pictureLbl.setIcon(listImages.get(index));
             currentImageId = index;
             numberLbl.setText((index + 1) + "/" + listImages.size());
+        } else {
+            pictureLbl.setIcon(null);
+            currentImageId = index;
+            numberLbl.setText("0/0");
         }
 
     }
