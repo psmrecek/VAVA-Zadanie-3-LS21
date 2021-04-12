@@ -178,7 +178,7 @@
         <Container class="javax.swing.JPanel" name="buttonsPnl">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="20" gridWidth="7" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
+              <GridBagConstraints gridX="0" gridY="20" gridWidth="11" gridHeight="1" fill="0" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
 
@@ -884,7 +884,7 @@
           <Parameters>
             <CodeExpression id="27">
               <ExpressionOrigin>
-                <Value type="int" value="7"/>
+                <Value type="int" value="11"/>
               </ExpressionOrigin>
             </CodeExpression>
           </Parameters>

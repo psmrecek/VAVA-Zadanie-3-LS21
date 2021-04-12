@@ -167,7 +167,7 @@ public class HotelManagementWindow extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 7;
+        gridBagConstraints.gridwidth = 11;
         jPanel1.add(buttonsPnl, gridBagConstraints);
 
         categoryCb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N

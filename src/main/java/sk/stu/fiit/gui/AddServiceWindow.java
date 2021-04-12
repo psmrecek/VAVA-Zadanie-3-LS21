@@ -86,7 +86,7 @@ public class AddServiceWindow extends javax.swing.JFrame {
         serviceCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Platba");
+        setTitle("Pridávanie služieb");
 
         java.awt.GridBagLayout jPanel1Layout = new java.awt.GridBagLayout();
         jPanel1Layout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
@@ -266,7 +266,7 @@ public class AddServiceWindow extends javax.swing.JFrame {
 
         titleLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         titleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLbl.setText("Platba");
+        titleLbl.setText("Služby");
         titleLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         titleLbl.setPreferredSize(new java.awt.Dimension(450, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();

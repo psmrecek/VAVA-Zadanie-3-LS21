@@ -643,7 +643,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addAccommAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new AddAccommodationWindow(this, hotel).setVisible(true);
     }
 
     private void addPaymentAction() {
