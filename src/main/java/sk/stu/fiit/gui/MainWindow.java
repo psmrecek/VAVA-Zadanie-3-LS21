@@ -191,7 +191,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Meno a priezvisko", "Počet aktívnych ubytovaní", "Počet aktívnych rezervácií"
+                "Meno a priezvisko", "Počet ubytovaní", "Počet rezervácií"
             }
         ) {
             boolean[] canEdit = new boolean [] {
