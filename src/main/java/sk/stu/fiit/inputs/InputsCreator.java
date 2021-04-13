@@ -23,8 +23,9 @@ public class InputsCreator {
     
     private static final Logger logger = Logger.getLogger(InputsCreator.class.getName());
     
-    public static void createInputs(Hotel hotel){
+    public static Hotel createInputs(){     
         
+        Hotel hotel = new Hotel();
         
         Customer c1 = new Customer("Arnošt Bublavý", "Cimenná 123", "+421000000000", "arnost@bublavy.com");
         Customer c2 = new Customer("Dobromila Ementálová", "Frankfurt 456", "+421111111111", "dobromila@ementalova.com");
@@ -143,5 +144,6 @@ public class InputsCreator {
             logger.error("Unable to create reservations");
         }
         
+        return hotel;
     }
 }

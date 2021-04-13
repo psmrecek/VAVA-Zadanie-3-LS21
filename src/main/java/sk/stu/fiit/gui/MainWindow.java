@@ -44,18 +44,11 @@ public class MainWindow extends javax.swing.JFrame {
         initComponents();
         BasicConfigurator.configure();
         dateTimeCounter();
-        loadAction();
-        updateAll();
         
-       
-
-//        logger.log(Level.INFO, "INFO1");
-//        logger.info("INFO");
-//        logger.debug("DEBUG");
-//        logger.fatal("FATAL");
-//        logger.error("ERROR");
-//        logger.warn("WARN");
+        hotel = new Hotel();
+        logger.info("New hotel created");
         
+        updateAll();  
     }
 
     /**
@@ -90,19 +83,11 @@ public class MainWindow extends javax.swing.JFrame {
         currentDateBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         loadBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -333,26 +318,22 @@ public class MainWindow extends javax.swing.JFrame {
         });
         settingsPnl.add(loadBtn);
 
-        controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 10, 430, 50));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jButton1.setText("Vzorové vstupy");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
+        settingsPnl.add(jButton1);
+
+        controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 540, 50));
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
-
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
-
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
-
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
+        fileMenu.setText("Súbor");
 
         exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
+        exitMenuItem.setText("Koniec");
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -362,36 +343,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         menuBar.add(fileMenu);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
-
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
-
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
-
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
-
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
-
-        menuBar.add(editMenu);
-
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
-
-        contentsMenuItem.setMnemonic('c');
-        contentsMenuItem.setText("Contents");
-        helpMenu.add(contentsMenuItem);
+        helpMenu.setText("Pomocník");
 
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
+        aboutMenuItem.setText("O aplikácií");
+        aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutMenuItemActionPerformed(evt);
+            }
+        });
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(helpMenu);
@@ -411,10 +372,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void addCustomerBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnMouseReleased
         // TODO add your handling code here:
@@ -481,6 +438,21 @@ public class MainWindow extends javax.swing.JFrame {
         addServiceAction();
     }//GEN-LAST:event_addServiceMouseReleased
 
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        // TODO add your handling code here:
+        hotel = InputsCreator.createInputs();
+        updateAll();
+    }//GEN-LAST:event_jButton1MouseReleased
+
+    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+        // TODO add your handling code here:
+        new AboutWindow().setVisible(true);
+    }//GEN-LAST:event_aboutMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -529,30 +501,22 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel buttonsPnl;
     private javax.swing.JButton cancelReservationBtn;
     private javax.swing.JButton changeDateBtn;
-    private javax.swing.JMenuItem contentsMenuItem;
     private javax.swing.JPanel controlsPnl;
-    private javax.swing.JMenuItem copyMenuItem;
     private javax.swing.JButton currentDateBtn;
     private javax.swing.JButton customerHistoryBtn;
     private javax.swing.JScrollPane customersScroll;
     private javax.swing.JTable customersTbl;
-    private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JLabel dateLbl;
-    private javax.swing.JMenuItem deleteMenuItem;
-    private javax.swing.JMenu editMenu;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton loadBtn;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JScrollPane reservationsScroll;
     private javax.swing.JTable reservationsTbl;
     private javax.swing.JButton roomShowBtn;
-    private javax.swing.JMenuItem saveAsMenuItem;
     private javax.swing.JButton saveBtn;
-    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JPanel settingsPnl;
     // End of variables declaration//GEN-END:variables
 
@@ -680,15 +644,12 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void saveAction() {
         Serializer.serialize(hotel);
+        updateAll();
     }
 
     private void loadAction() {
         hotel = Serializer.deserialize();
-        if (hotel == null) {
-            hotel = new Hotel();
-            logger.info("New hotel created");
-            InputsCreator.createInputs(hotel);
-        }
+        updateAll();
     }
 
     private void currentDateAction() {

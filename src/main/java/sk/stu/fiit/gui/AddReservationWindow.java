@@ -728,9 +728,6 @@ public class AddReservationWindow extends javax.swing.JFrame {
             return;
         }
         
-        
-        //osetrit vstupy
-        
         long diffInMillies = Math.abs(end.getTime() - start.getTime());
         int diffInDays = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         double nightPrice = category.getPrice();
