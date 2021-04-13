@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import sk.stu.fiit.inputs.InputProcessor;
-import sk.stu.fiit.logic.Accommodation;
 import sk.stu.fiit.logic.Category;
 import sk.stu.fiit.logic.Customer;
 import sk.stu.fiit.logic.Hotel;
@@ -24,7 +23,7 @@ import sk.stu.fiit.logic.Room;
  *
  * @author PeterSmrecek
  */
-public class AddAccommodationWindow extends javax.swing.JFrame {
+public class AddReservationWindow extends javax.swing.JFrame {
 
     private Hotel hotel;
     private MainWindow mainWindow;
@@ -39,11 +38,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
     
     private ArrayList<String> listCustomerNames;
     private ArrayList<Customer> listCustomers;
-    
-    private ArrayList<String> listReservationNames;
-    private ArrayList<Reservation> listReservations;
-    
-    private Reservation accommReservation;
+
     private Customer accommCustomer;
     private Room accommRoom;
     private Date accommStartDate;
@@ -52,7 +47,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
     /**
      * Creates new form CustomerHistoriWindow
      */
-    public AddAccommodationWindow(MainWindow mainWindow, Hotel hotel) {
+    public AddReservationWindow(MainWindow mainWindow, Hotel hotel) {
         initComponents();
         this.hotel = hotel;
         this.mainWindow = mainWindow;
@@ -62,10 +57,9 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         listCustomers = hotel.getListCustomers();
         listCustomerNames = InputProcessor.getListOfNames(listCustomers);
         
-        listReservations = hotel.getListReservations();
-        listReservationNames = InputProcessor.getListOfNames(listReservations);
-        
-        withResAction();
+        clearFields();
+        customersCb.setModel(new DefaultComboBoxModel<String>(listCustomerNames.toArray(new String[0])));
+        loadCustomer(0);
     }
 
     /**
@@ -82,7 +76,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         mainPnl = new javax.swing.JPanel();
         titleLbl = new javax.swing.JLabel();
         buttonsPnl = new javax.swing.JPanel();
-        newAccommBtn = new javax.swing.JButton();
+        newReservationBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         customerPnl = new javax.swing.JPanel();
         phoneLbl = new javax.swing.JLabel();
@@ -90,9 +84,11 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         emailTf = new javax.swing.JTextField();
         emailLbl = new javax.swing.JLabel();
         nameTf = new javax.swing.JTextField();
-        nameLbl = new javax.swing.JLabel();
+        chooseLbl = new javax.swing.JLabel();
         addressTf = new javax.swing.JTextField();
         addressLbl = new javax.swing.JLabel();
+        customersCb = new javax.swing.JComboBox<>();
+        nameLbl = new javax.swing.JLabel();
         newAccommodationPnl = new javax.swing.JPanel();
         priceNightLbl = new javax.swing.JLabel();
         roomLbl = new javax.swing.JLabel();
@@ -112,11 +108,6 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         roomCb = new javax.swing.JComboBox<>();
         availableBtn = new javax.swing.JButton();
         selectCategoryBtn = new javax.swing.JButton();
-        typePnl = new javax.swing.JPanel();
-        withoutResRb = new javax.swing.JRadioButton();
-        customersCb = new javax.swing.JComboBox<>();
-        withResRb = new javax.swing.JRadioButton();
-        reservationsCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ubytovanie");
@@ -128,7 +119,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
 
         titleLbl.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         titleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLbl.setText("Ubytovanie");
+        titleLbl.setText("Rezervácie");
         titleLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         titleLbl.setPreferredSize(new java.awt.Dimension(450, 40));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -139,14 +130,14 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
 
         buttonsPnl.setLayout(new javax.swing.BoxLayout(buttonsPnl, javax.swing.BoxLayout.LINE_AXIS));
 
-        newAccommBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        newAccommBtn.setText("Vytvoriť nové ubytovanie");
-        newAccommBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        newReservationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        newReservationBtn.setText("Vytvoriť novú rezerváciu");
+        newReservationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                newAccommBtnMouseReleased(evt);
+                newReservationBtnMouseReleased(evt);
             }
         });
-        buttonsPnl.add(newAccommBtn);
+        buttonsPnl.add(newReservationBtn);
 
         cancelBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cancelBtn.setText("Zrušiť");
@@ -165,7 +156,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         customerPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informácie o zákazníkovi", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         java.awt.GridBagLayout customerPnlLayout = new java.awt.GridBagLayout();
         customerPnlLayout.columnWidths = new int[] {0, 5, 0};
-        customerPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0};
+        customerPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
         customerPnl.setLayout(customerPnlLayout);
 
         phoneLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -174,7 +165,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         phoneLbl.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
         customerPnl.add(phoneLbl, gridBagConstraints);
 
         phoneTf.setEditable(false);
@@ -183,7 +174,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         phoneTf.setPreferredSize(new java.awt.Dimension(300, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 6;
         customerPnl.add(phoneTf, gridBagConstraints);
 
         emailTf.setEditable(false);
@@ -192,7 +183,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         emailTf.setPreferredSize(new java.awt.Dimension(300, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         customerPnl.add(emailTf, gridBagConstraints);
 
         emailLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -201,7 +192,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         emailLbl.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 8;
         customerPnl.add(emailLbl, gridBagConstraints);
 
         nameTf.setEditable(false);
@@ -210,17 +201,17 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         nameTf.setPreferredSize(new java.awt.Dimension(300, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         customerPnl.add(nameTf, gridBagConstraints);
 
-        nameLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        nameLbl.setText("Meno");
-        nameLbl.setMinimumSize(new java.awt.Dimension(200, 20));
-        nameLbl.setPreferredSize(new java.awt.Dimension(200, 20));
+        chooseLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        chooseLbl.setText("Zvoľ zákazníka");
+        chooseLbl.setMinimumSize(new java.awt.Dimension(200, 20));
+        chooseLbl.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        customerPnl.add(nameLbl, gridBagConstraints);
+        customerPnl.add(chooseLbl, gridBagConstraints);
 
         addressTf.setEditable(false);
         addressTf.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -228,7 +219,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         addressTf.setPreferredSize(new java.awt.Dimension(300, 26));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         customerPnl.add(addressTf, gridBagConstraints);
 
         addressLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -237,8 +228,30 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         addressLbl.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         customerPnl.add(addressLbl, gridBagConstraints);
+
+        customersCb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        customersCb.setMinimumSize(new java.awt.Dimension(300, 26));
+        customersCb.setPreferredSize(new java.awt.Dimension(300, 26));
+        customersCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customersCbActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        customerPnl.add(customersCb, gridBagConstraints);
+
+        nameLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        nameLbl.setText("Meno");
+        nameLbl.setMinimumSize(new java.awt.Dimension(200, 20));
+        nameLbl.setPreferredSize(new java.awt.Dimension(200, 20));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        customerPnl.add(nameLbl, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -248,10 +261,10 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         mainPnl.add(customerPnl, gridBagConstraints);
 
         newAccommodationPnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ubytovanie", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        java.awt.GridBagLayout jPanel3Layout = new java.awt.GridBagLayout();
-        jPanel3Layout.columnWidths = new int[] {0, 5, 0};
-        jPanel3Layout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
-        newAccommodationPnl.setLayout(jPanel3Layout);
+        java.awt.GridBagLayout newAccommodationPnlLayout = new java.awt.GridBagLayout();
+        newAccommodationPnlLayout.columnWidths = new int[] {0, 5, 0};
+        newAccommodationPnlLayout.rowHeights = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
+        newAccommodationPnl.setLayout(newAccommodationPnlLayout);
 
         priceNightLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         priceNightLbl.setText("Cena za noc");
@@ -431,78 +444,6 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         gridBagConstraints.gridheight = 11;
         mainPnl.add(newAccommodationPnl, gridBagConstraints);
 
-        typePnl.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Typ tvorby ubytovania", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
-        java.awt.GridBagLayout typePnlLayout = new java.awt.GridBagLayout();
-        typePnlLayout.columnWidths = new int[] {0, 5, 0};
-        typePnlLayout.rowHeights = new int[] {0, 5, 0};
-        typePnl.setLayout(typePnlLayout);
-
-        buttonGroup1.add(withoutResRb);
-        withoutResRb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        withoutResRb.setText("Bez rezervácie");
-        withoutResRb.setMaximumSize(new java.awt.Dimension(300, 50));
-        withoutResRb.setMinimumSize(new java.awt.Dimension(200, 30));
-        withoutResRb.setPreferredSize(new java.awt.Dimension(200, 30));
-        withoutResRb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                withoutResRbActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        typePnl.add(withoutResRb, gridBagConstraints);
-
-        customersCb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        customersCb.setMinimumSize(new java.awt.Dimension(300, 26));
-        customersCb.setPreferredSize(new java.awt.Dimension(300, 26));
-        customersCb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customersCbActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
-        typePnl.add(customersCb, gridBagConstraints);
-
-        buttonGroup1.add(withResRb);
-        withResRb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        withResRb.setSelected(true);
-        withResRb.setText("S rezerváciou");
-        withResRb.setMaximumSize(new java.awt.Dimension(300, 50));
-        withResRb.setMinimumSize(new java.awt.Dimension(200, 30));
-        withResRb.setPreferredSize(new java.awt.Dimension(200, 30));
-        withResRb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                withResRbActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        typePnl.add(withResRb, gridBagConstraints);
-
-        reservationsCb.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        reservationsCb.setMinimumSize(new java.awt.Dimension(300, 26));
-        reservationsCb.setPreferredSize(new java.awt.Dimension(300, 26));
-        reservationsCb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reservationsCbActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        typePnl.add(reservationsCb, gridBagConstraints);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 3;
-        mainPnl.add(typePnl, gridBagConstraints);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -521,73 +462,28 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newAccommBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newAccommBtnMouseReleased
+    private void newReservationBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newReservationBtnMouseReleased
         // TODO add your handling code here:
-        if (withResRb.isSelected()) {
-            if (accommReservation != null) {
-                hotel.removeReservation(accommReservation);
-                Accommodation accommodation = new Accommodation(accommCustomer, accommRoom, accommStartDate, accommEndDate);
-                hotel.addAccommodation(accommodation);
-            } else {
-                JOptionPane.showMessageDialog(rootPane,
-                        "Výber rezervácie nemôže byť prázdny!",
-                        "Chyba!", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-        }
         
-        if (withoutResRb.isSelected()) {
-            countForRoom();
-            if (hotel.available(accommStartDate, accommEndDate, accommRoom)) {
-                Accommodation accommodation = new Accommodation(accommCustomer, accommRoom, accommStartDate, accommEndDate);
-                hotel.addAccommodation(accommodation);
-            } else {
-                JOptionPane.showMessageDialog(rootPane,
-                        "Izba v danom termíne nie je dostupná!",
-                        "Chyba!", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        countForRoom();
+        if (hotel.available(accommStartDate, accommEndDate, accommRoom)) {
+            Reservation reservation = new Reservation(accommCustomer, accommRoom, accommStartDate, accommEndDate);
+            hotel.addReservation(reservation);
+        } else {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Izba v danom termíne nie je dostupná!",
+                    "Chyba!", JOptionPane.ERROR_MESSAGE);
+            return;
         }
         
         mainWindow.updateAll();
         this.dispose();
-    }//GEN-LAST:event_newAccommBtnMouseReleased
+    }//GEN-LAST:event_newReservationBtnMouseReleased
 
     private void cancelBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelBtnMouseReleased
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_cancelBtnMouseReleased
-
-    private void withResRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withResRbActionPerformed
-        // TODO add your handling code here:
-        withResAction();
-    }//GEN-LAST:event_withResRbActionPerformed
-
-    private void withoutResRbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_withoutResRbActionPerformed
-        // TODO add your handling code here:
-        wihoutResAction();
-    }//GEN-LAST:event_withoutResRbActionPerformed
-
-    private void reservationsCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservationsCbActionPerformed
-        // TODO add your handling code here:
-        
-        
-        String atribute = "";
-
-        if (reservationsCb.getSelectedItem() != null) {
-            atribute = String.valueOf(reservationsCb.getSelectedItem());
-        }
-
-        if (InputProcessor.emptyString(atribute)) {
-//            JOptionPane.showMessageDialog(rootPane,
-//                    "Výber nemôže byť prázdny!",
-//                    "Chyba!", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        int index = listReservationNames.indexOf(atribute);
-        loadReservation(index);
-    }//GEN-LAST:event_reservationsCbActionPerformed
 
     private void customersCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customersCbActionPerformed
         // TODO add your handling code here:
@@ -678,6 +574,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
     private javax.swing.JButton cancelBtn;
     private javax.swing.JComboBox<String> categoryCb;
     private javax.swing.JLabel categoryLbl;
+    private javax.swing.JLabel chooseLbl;
     private javax.swing.JPanel customerPnl;
     private javax.swing.JComboBox<String> customersCb;
     private javax.swing.JLabel discountLbl;
@@ -689,15 +586,14 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
     private javax.swing.JPanel mainPnl;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JTextField nameTf;
-    private javax.swing.JButton newAccommBtn;
     private javax.swing.JPanel newAccommodationPnl;
+    private javax.swing.JButton newReservationBtn;
     private javax.swing.JLabel nightsLbl;
     private javax.swing.JTextField nightsTf;
     private javax.swing.JLabel phoneLbl;
     private javax.swing.JTextField phoneTf;
     private javax.swing.JLabel priceNightLbl;
     private javax.swing.JTextField priceNightTf;
-    private javax.swing.JComboBox<String> reservationsCb;
     private javax.swing.JComboBox<String> roomCb;
     private javax.swing.JLabel roomLbl;
     private javax.swing.JButton selectCategoryBtn;
@@ -706,16 +602,15 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
     private javax.swing.JLabel sumLbl;
     private javax.swing.JTextField sumTf;
     private javax.swing.JLabel titleLbl;
-    private javax.swing.JPanel typePnl;
-    private javax.swing.JRadioButton withResRb;
-    private javax.swing.JRadioButton withoutResRb;
     // End of variables declaration//GEN-END:variables
     
     private void refreshCategories() {
         listCategories = hotel.getListCategories();
         listCategoriesNames = InputProcessor.getListOfNames(listCategories);
         categoryCb.setModel(new DefaultComboBoxModel<String>(listCategoriesNames.toArray(new String[0])));
-
+        
+        roomCb.setEnabled(false);
+        
         refrehRooms();
     }
 
@@ -760,64 +655,6 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         nightsTf.setText("");
         discountTf.setText("");
         sumTf.setText("");
-    }
-    
-    private void loadReservation(int id) {
-        clearFields();
-        startDateTf.setEditable(false);
-        endDateTf.setEditable(false);
-        categoryCb.setEnabled(false);
-        roomCb.setEnabled(false);
-        priceNightTf.setEditable(false);
-        nightsTf.setEditable(false);
-        priceNightTf.setEditable(false);
-        nightsTf.setEditable(false);
-        discountTf.setEditable(false);
-        sumTf.setEditable(false);
-        
-        if (listReservations.size() == 0) {
-            return;
-        }
-        
-        Reservation reservation = listReservations.get(id);
-        Customer customer = reservation.getCustomer();
-        Room room = reservation.getRoom();
-        Category category = room.getCategory();
-        
-        int categoryId = listCategories.indexOf(category);
-        categoryCb.setSelectedIndex(categoryId);
-        refrehRooms();
-        
-        int roomId = listRooms.indexOf(room);
-        roomCb.setSelectedIndex(roomId);
-        
-        Date start = reservation.getStartDate();
-        Date end = reservation.getEndDate();
-        long diffInMillies = Math.abs(end.getTime() - start.getTime());
-        int diffInDays = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-        double nightPrice = category.getPrice();
-        double originalPrice = nightPrice * diffInDays;
-        int discount = diffInDays > 7 ? 10 : 0;
-        double priceSum = originalPrice * (100 - discount) / 100;
-        
-        accommReservation = reservation;
-        accommCustomer = customer;
-        accommRoom = room;
-        accommStartDate = start;
-        accommEndDate = end;
-        
-        nameTf.setText(customer.getName());
-        addressTf.setText(customer.getAddress());
-        phoneTf.setText(customer.getPhoneNumber());
-        emailTf.setText(customer.getEmail());
-        
-        startDateTf.setText(sdfCreate.format(reservation.getStartDate()));
-        endDateTf.setText(sdfCreate.format(reservation.getEndDate()));
-        priceNightTf.setText(String.valueOf(nightPrice));
-        nightsTf.setText(String.valueOf(diffInDays));
-        discountTf.setText(discount > 0 ? String.valueOf(discount) : "Bez zľavy");
-        sumTf.setText(String.valueOf(priceSum));
-        
     }
 
     private void loadCustomer(int id) {
@@ -909,31 +746,5 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         accommRoom = room;
         accommStartDate = InputProcessor.dateStart(start);
         accommEndDate = InputProcessor.dateStart(end);
-    }
-
-    private void withResAction() {
-        if (withResRb.isSelected()) {
-            clearFields();
-            selectCategoryBtn.setVisible(false);
-            availableBtn.setVisible(false);
-            reservationsCb.setVisible(true);
-            reservationsCb.setModel(new DefaultComboBoxModel<String>(listReservationNames.toArray(new String[0])));
-            customersCb.setVisible(false);
-
-            loadReservation(0);
-        }
-    }
-
-    private void wihoutResAction() {
-        if (withoutResRb.isSelected()) {
-            clearFields();
-            selectCategoryBtn.setVisible(true);
-            availableBtn.setVisible(true);
-            customersCb.setVisible(true);
-            customersCb.setModel(new DefaultComboBoxModel<String>(listCustomerNames.toArray(new String[0])));
-            reservationsCb.setVisible(false);
-
-            loadCustomer(0);
-        }
     }
 }

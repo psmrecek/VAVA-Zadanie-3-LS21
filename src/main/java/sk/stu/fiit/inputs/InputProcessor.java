@@ -8,6 +8,8 @@ package sk.stu.fiit.inputs;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import sk.stu.fiit.logic.IName;
 
@@ -88,5 +90,19 @@ public final class InputProcessor {
             listOfNames.add(iname.getName());
         }
         return listOfNames;
+    }
+    
+    public static Date dateStart(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, 9);
+        return calendar.getTime();
+    }
+    
+    public static Date dateEnd(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.HOUR_OF_DAY, 10);
+        return calendar.getTime();
     }
 }

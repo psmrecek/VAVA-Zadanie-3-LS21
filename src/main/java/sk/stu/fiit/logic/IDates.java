@@ -14,4 +14,5 @@ import java.util.Date;
 public interface IDates {
     public Date getStartDate();
     public Date getEndDate();
+    public Room getRoom();
 }

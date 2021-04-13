@@ -1,6 +1,7 @@
 package sk.stu.fiit.logic;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -9,12 +10,13 @@ import java.util.Date;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Reservation implements Serializable, IDates {
+public class Reservation implements Serializable, IDates, IName {
 
     private Customer customer;
     private Room room;
     private Date startDate;
     private Date endDate;
+    private SimpleDateFormat sdfCreate = new SimpleDateFormat("dd.MM.yyyy");
 
     public Reservation(Customer customer, Room room, Date startDate, Date endDate) {
         this.customer = customer;
@@ -56,6 +58,10 @@ public class Reservation implements Serializable, IDates {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getName() {
+        return customer.getName() + ": " + sdfCreate.format(startDate) + " - " + sdfCreate.format(endDate);
     }
     
 }//end Reservation

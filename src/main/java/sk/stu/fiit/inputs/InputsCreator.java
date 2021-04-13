@@ -100,12 +100,12 @@ public class InputsCreator {
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         
         try {
-            Accommodation ac1 = new Accommodation(c1, r1, sdf.parse("1.1.2021 10:00"), sdf.parse("7.1.2021 10:00"));
-            Accommodation ac2 = new Accommodation(c1, r2, sdf.parse("1.2.2021 10:00"), sdf.parse("7.2.2021 10:00"));
-            Accommodation ac3 = new Accommodation(c2, r3, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Accommodation ac4 = new Accommodation(c3, r4, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Accommodation ac5 = new Accommodation(c1, r1, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Accommodation ac6 = new Accommodation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.4.2021 10:00"));
+            Accommodation ac1 = new Accommodation(c1, r1, sdf.parse("1.1.2021 10:00"), sdf.parse("7.1.2021 09:00"));
+            Accommodation ac2 = new Accommodation(c1, r2, sdf.parse("1.2.2021 10:00"), sdf.parse("7.2.2021 9:00"));
+            Accommodation ac3 = new Accommodation(c2, r3, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 9:00"));
+            Accommodation ac4 = new Accommodation(c3, r4, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 9:00"));
+            Accommodation ac5 = new Accommodation(c1, r1, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 9:00"));
+            Accommodation ac6 = new Accommodation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.4.2021 9:00"));
             
             ac1.addService(s1);
             ac2.addService(s2);
@@ -117,23 +117,23 @@ public class InputsCreator {
             ac1.addService(s2);
             ac1.addService(s3);
             
+            hotel.addAccommodation(ac3);
             hotel.addAccommodation(ac1);
             hotel.addAccommodation(ac2);
-            hotel.addAccommodation(ac3);
             hotel.addAccommodation(ac4);
             hotel.addAccommodation(ac5);
             hotel.addAccommodation(ac6);
             
-            Reservation res1 = new Reservation(c1, r1, sdf.parse("1.1.2021 10:00"), sdf.parse("7.1.2021 10:00"));
-            Reservation res2 = new Reservation(c1, r2, sdf.parse("1.2.2021 10:00"), sdf.parse("7.2.2021 10:00"));
-            Reservation res3 = new Reservation(c2, r3, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Reservation res4 = new Reservation(c3, r4, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Reservation res5 = new Reservation(c1, r1, sdf.parse("1.3.2021 10:00"), sdf.parse("7.3.2021 10:00"));
-            Reservation res6 = new Reservation(c1, r4, sdf.parse("1.4.2021 10:00"), sdf.parse("14.4.2021 10:00"));
+            Reservation res1 = new Reservation(c1, r1, sdf.parse("1.5.2021 10:00"), sdf.parse("7.5.2021 9:00"));
+            Reservation res2 = new Reservation(c1, r2, sdf.parse("1.6.2021 10:00"), sdf.parse("7.6.2021 9:00"));
+            Reservation res3 = new Reservation(c2, r3, sdf.parse("1.7.2021 10:00"), sdf.parse("7.7.2021 9:00"));
+            Reservation res4 = new Reservation(c3, r4, sdf.parse("1.7.2021 10:00"), sdf.parse("7.7.2021 9:00"));
+            Reservation res5 = new Reservation(c1, r1, sdf.parse("1.7.2021 10:00"), sdf.parse("7.7.2021 9:00"));
+            Reservation res6 = new Reservation(c1, r4, sdf.parse("1.8.2021 10:00"), sdf.parse("14.8.2021 9:00"));
             
+            hotel.addReservation(res3);
             hotel.addReservation(res1);
             hotel.addReservation(res2);
-            hotel.addReservation(res3);
             hotel.addReservation(res4);
             hotel.addReservation(res5);
             hotel.addReservation(res6);

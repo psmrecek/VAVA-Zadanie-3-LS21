@@ -635,11 +635,28 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addReservationAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        new AddReservationWindow(this, hotel).setVisible(true);
     }
 
     private void cancelReservationAction() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int reservationTableIndex = getRow(reservationsTbl, "Nie je vybraná žiadna rezervácia z tabuľky!");
+        if (reservationTableIndex == -1) {
+            return;
+        }
+        
+        Reservation reservation = hotel.getListReservations().get(reservationTableIndex);
+        
+        if (hotel.removeReservation(reservation)) {
+            updateAll();
+            JOptionPane.showMessageDialog(rootPane,
+                    "Rezervácia bola úspešne zmazaná",
+                    "Zmazaná rezervácia", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            updateAll();
+            JOptionPane.showMessageDialog(rootPane,
+                    "Nemožno zmazať rezerváciu!",
+                    "Chyba!", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void addAccommAction() {

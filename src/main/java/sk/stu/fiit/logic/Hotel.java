@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 /**
@@ -99,5 +100,41 @@ public class Hotel implements Serializable {
     public void setPaidAccomm(Accommodation accommodation){
         listAccommodationsUnpaid.remove(accommodation);
         listAccommodationsPaid.add(accommodation);
+    }
+    
+    public boolean removeReservation(Reservation reservation){
+        try {
+            listReservations.remove(reservation);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    private boolean availableList(ArrayList<? extends IDates> list, Date accommStartDate, Date accommEndDate, Room accommRoom){
+        for (IDates elem : list) {
+            Date start = elem.getStartDate();
+            Date end = elem.getEndDate();
+            
+            if (elem.getRoom().equals(accommRoom)) {
+                if (accommStartDate.after(start) && accommStartDate.before(end)) {
+                    return false;
+                }
+                if (accommEndDate.after(start) && accommEndDate.before(end)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean available(Date accommStartDate, Date accommEndDate, Room accommRoom) {
+        if (availableList(listReservations, accommStartDate, accommEndDate, accommRoom) 
+                && availableList(listAccommodationsUnpaid, accommStartDate, accommEndDate, accommRoom) 
+                && availableList(listAccommodationsPaid, accommStartDate, accommEndDate, accommRoom)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }//end Hotel

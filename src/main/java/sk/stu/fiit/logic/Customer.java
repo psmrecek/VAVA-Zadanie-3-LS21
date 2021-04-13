@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @created 10-apr-2021 14:38:04
  */
-public class Customer implements Serializable {
+public class Customer implements Serializable, IName {
 
     private ArrayList<Reservation> listReservations = new ArrayList<>();
     private ArrayList<Accommodation> listAccommodations = new ArrayList<>();
