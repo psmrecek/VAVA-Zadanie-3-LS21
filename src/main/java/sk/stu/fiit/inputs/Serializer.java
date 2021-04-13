@@ -6,13 +6,11 @@
 package sk.stu.fiit.inputs;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import org.apache.log4j.Logger;
-import sk.stu.fiit.gui.MainWindow;
 import sk.stu.fiit.logic.Hotel;
 
 /**

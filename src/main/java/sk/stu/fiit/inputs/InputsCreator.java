@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
-import sk.stu.fiit.gui.MainWindow;
 import sk.stu.fiit.logic.*;
 
 /**

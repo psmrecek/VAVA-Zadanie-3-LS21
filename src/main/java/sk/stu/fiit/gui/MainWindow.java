@@ -5,7 +5,8 @@
  */
 package sk.stu.fiit.gui;
 
-import java.text.ParseException;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,8 +31,8 @@ public class MainWindow extends javax.swing.JFrame {
     
     private boolean customDate = false;
     private Calendar customCalendar = new GregorianCalendar();
-    private SimpleDateFormat sdfTimeDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-    private SimpleDateFormat sdfRoom = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+    private SimpleDateFormat sdfTimeDate = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss"); //NOI18N
+    private SimpleDateFormat sdfRoom = new SimpleDateFormat("dd.MM.yyyy HH:mm"); //NOI18N
     private Hotel hotel;
     private Date currentDateApp;
     private Date realDateApp;
@@ -46,7 +47,7 @@ public class MainWindow extends javax.swing.JFrame {
         dateTimeCounter();
         
         hotel = new Hotel();
-        logger.info("New hotel created");
+        logger.info("New hotel created"); //NOI18N
         
         updateAll();  
     }
@@ -91,14 +92,15 @@ public class MainWindow extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Hotel");
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("Bundle"); // NOI18N
+        setTitle(bundle.getString("HOTEL")); // NOI18N
 
         controlsPnl.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         buttonsPnl.setLayout(new javax.swing.BoxLayout(buttonsPnl, javax.swing.BoxLayout.LINE_AXIS));
 
         addCustomerBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addCustomerBtn.setText("Pridať zákazníka");
+        addCustomerBtn.setText(bundle.getString("PRIDAŤ ZÁKAZNÍKA")); // NOI18N
         addCustomerBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addCustomerBtnMouseReleased(evt);
@@ -107,7 +109,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(addCustomerBtn);
 
         addReservationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addReservationBtn.setText("Vytvoriť rezerváciu");
+        addReservationBtn.setText(bundle.getString("VYTVORIŤ REZERVÁCIU")); // NOI18N
         addReservationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addReservationBtnMouseReleased(evt);
@@ -116,7 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(addReservationBtn);
 
         cancelReservationBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        cancelReservationBtn.setText("Zrušiť rezerváciu");
+        cancelReservationBtn.setText(bundle.getString("ZRUŠIŤ REZERVÁCIU")); // NOI18N
         cancelReservationBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 cancelReservationBtnMouseReleased(evt);
@@ -125,7 +127,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(cancelReservationBtn);
 
         addAccommBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addAccommBtn.setText("Ubytovať");
+        addAccommBtn.setText(bundle.getString("UBYTOVAŤ")); // NOI18N
         addAccommBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addAccommBtnMouseReleased(evt);
@@ -134,7 +136,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(addAccommBtn);
 
         addService.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addService.setText("Využiť službu");
+        addService.setText(bundle.getString("VYUŽIŤ SLUŽBU")); // NOI18N
         addService.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addServiceMouseReleased(evt);
@@ -143,7 +145,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(addService);
 
         addPaymentBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addPaymentBtn.setText("Zaznamenať platbu");
+        addPaymentBtn.setText(bundle.getString("ZAZNAMENAŤ PLATBU")); // NOI18N
         addPaymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addPaymentBtnMouseReleased(evt);
@@ -152,7 +154,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(addPaymentBtn);
 
         customerHistoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        customerHistoryBtn.setText("História zákazníka");
+        customerHistoryBtn.setText(bundle.getString("HISTÓRIA ZÁKAZNÍKA")); // NOI18N
         customerHistoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 customerHistoryBtnMouseReleased(evt);
@@ -161,7 +163,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(customerHistoryBtn);
 
         roomShowBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        roomShowBtn.setText("Zobrazovač izieb");
+        roomShowBtn.setText(bundle.getString("ZOBRAZOVAČ IZIEB")); // NOI18N
         roomShowBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 roomShowBtnMouseReleased(evt);
@@ -170,7 +172,7 @@ public class MainWindow extends javax.swing.JFrame {
         buttonsPnl.add(roomShowBtn);
 
         addRoomOrCategoryBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        addRoomOrCategoryBtn.setText("Pridať službu, kategóriu alebo izbu");
+        addRoomOrCategoryBtn.setText(bundle.getString("PRIDAŤ SLUŽBU, KATEGÓRIU ALEBO IZBU")); // NOI18N
         addRoomOrCategoryBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 addRoomOrCategoryBtnMouseReleased(evt);
@@ -276,14 +278,14 @@ public class MainWindow extends javax.swing.JFrame {
         controlsPnl.add(accommScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 1320, 200));
 
         dateLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        dateLbl.setText("Dátum");
+        dateLbl.setText(bundle.getString("DÁTUM")); // NOI18N
         controlsPnl.add(dateLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 280, 50));
 
         settingsPnl.setAlignmentX(1.0F);
         settingsPnl.setLayout(new javax.swing.BoxLayout(settingsPnl, javax.swing.BoxLayout.LINE_AXIS));
 
         changeDateBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        changeDateBtn.setText("Zmeniť dátum");
+        changeDateBtn.setText(bundle.getString("ZMENIŤ DÁTUM")); // NOI18N
         changeDateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 changeDateBtnMouseReleased(evt);
@@ -292,7 +294,7 @@ public class MainWindow extends javax.swing.JFrame {
         settingsPnl.add(changeDateBtn);
 
         currentDateBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        currentDateBtn.setText("Aktuálny dátum");
+        currentDateBtn.setText(bundle.getString("AKTUÁLNY DÁTUM")); // NOI18N
         currentDateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 currentDateBtnMouseReleased(evt);
@@ -301,7 +303,7 @@ public class MainWindow extends javax.swing.JFrame {
         settingsPnl.add(currentDateBtn);
 
         saveBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        saveBtn.setText("Uložiť");
+        saveBtn.setText(bundle.getString("ULOŽIŤ")); // NOI18N
         saveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 saveBtnMouseReleased(evt);
@@ -310,7 +312,7 @@ public class MainWindow extends javax.swing.JFrame {
         settingsPnl.add(saveBtn);
 
         loadBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        loadBtn.setText("Načítať");
+        loadBtn.setText(bundle.getString("NAČÍTAŤ")); // NOI18N
         loadBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 loadBtnMouseReleased(evt);
@@ -319,7 +321,7 @@ public class MainWindow extends javax.swing.JFrame {
         settingsPnl.add(loadBtn);
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setText("Vzorové vstupy");
+        jButton1.setText(bundle.getString("VZOROVÉ VSTUPY")); // NOI18N
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jButton1MouseReleased(evt);
@@ -330,10 +332,10 @@ public class MainWindow extends javax.swing.JFrame {
         controlsPnl.add(settingsPnl, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 540, 50));
 
         fileMenu.setMnemonic('f');
-        fileMenu.setText("Súbor");
+        fileMenu.setText(bundle.getString("SÚBOR")); // NOI18N
 
         exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Koniec");
+        exitMenuItem.setText(bundle.getString("KONIEC")); // NOI18N
         exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitMenuItemActionPerformed(evt);
@@ -344,10 +346,10 @@ public class MainWindow extends javax.swing.JFrame {
         menuBar.add(fileMenu);
 
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Pomocník");
+        helpMenu.setText(bundle.getString("POMOCNÍK")); // NOI18N
 
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("O aplikácií");
+        aboutMenuItem.setText(bundle.getString("O APLIKÁCIÍ")); // NOI18N
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutMenuItemActionPerformed(evt);
@@ -373,82 +375,82 @@ public class MainWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addCustomerBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnMouseReleased
+    private void addCustomerBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnMouseReleased
         // TODO add your handling code here:
         addCustomerAction();
     }//GEN-LAST:event_addCustomerBtnMouseReleased
 
-    private void addReservationBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addReservationBtnMouseReleased
+    private void addReservationBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_addReservationBtnMouseReleased
         // TODO add your handling code here:
         addReservationAction();
     }//GEN-LAST:event_addReservationBtnMouseReleased
 
-    private void cancelReservationBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelReservationBtnMouseReleased
+    private void cancelReservationBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_cancelReservationBtnMouseReleased
         // TODO add your handling code here:
         cancelReservationAction();
     }//GEN-LAST:event_cancelReservationBtnMouseReleased
 
-    private void addAccommBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addAccommBtnMouseReleased
+    private void addAccommBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_addAccommBtnMouseReleased
         // TODO add your handling code here:
         addAccommAction();
     }//GEN-LAST:event_addAccommBtnMouseReleased
 
-    private void addPaymentBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPaymentBtnMouseReleased
+    private void addPaymentBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_addPaymentBtnMouseReleased
         // TODO add your handling code here:
         addPaymentAction();
     }//GEN-LAST:event_addPaymentBtnMouseReleased
 
-    private void customerHistoryBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerHistoryBtnMouseReleased
+    private void customerHistoryBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_customerHistoryBtnMouseReleased
         // TODO add your handling code here:
         customerHistoryAction();
     }//GEN-LAST:event_customerHistoryBtnMouseReleased
 
-    private void roomShowBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roomShowBtnMouseReleased
+    private void roomShowBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_roomShowBtnMouseReleased
         // TODO add your handling code here:
         roomShowAction();
     }//GEN-LAST:event_roomShowBtnMouseReleased
 
-    private void changeDateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_changeDateBtnMouseReleased
+    private void changeDateBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_changeDateBtnMouseReleased
         // TODO add your handling code here:
         changeDateAction();
     }//GEN-LAST:event_changeDateBtnMouseReleased
 
-    private void saveBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnMouseReleased
+    private void saveBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_saveBtnMouseReleased
         // TODO add your handling code here:
         saveAction();
     }//GEN-LAST:event_saveBtnMouseReleased
 
-    private void loadBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadBtnMouseReleased
+    private void loadBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_loadBtnMouseReleased
         // TODO add your handling code here:
         loadAction();
     }//GEN-LAST:event_loadBtnMouseReleased
 
-    private void currentDateBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_currentDateBtnMouseReleased
+    private void currentDateBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_currentDateBtnMouseReleased
         // TODO add your handling code here:
         currentDateAction();
     }//GEN-LAST:event_currentDateBtnMouseReleased
 
-    private void addRoomOrCategoryBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomOrCategoryBtnMouseReleased
+    private void addRoomOrCategoryBtnMouseReleased(MouseEvent evt) {//GEN-FIRST:event_addRoomOrCategoryBtnMouseReleased
         // TODO add your handling code here:
         addRoomOrCategoryAction();
     }//GEN-LAST:event_addRoomOrCategoryBtnMouseReleased
 
-    private void addServiceMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addServiceMouseReleased
+    private void addServiceMouseReleased(MouseEvent evt) {//GEN-FIRST:event_addServiceMouseReleased
         // TODO add your handling code here:
         addServiceAction();
     }//GEN-LAST:event_addServiceMouseReleased
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+    private void exitMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+    private void jButton1MouseReleased(MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         // TODO add your handling code here:
         hotel = InputsCreator.createInputs();
         updateAll();
     }//GEN-LAST:event_jButton1MouseReleased
 
-    private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
+    private void aboutMenuItemActionPerformed(ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         // TODO add your handling code here:
         new AboutWindow().setVisible(true);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
@@ -464,7 +466,7 @@ public class MainWindow extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) { //NOI18N
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -489,35 +491,35 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JScrollPane accommScroll;
-    private javax.swing.JTable accommTbl;
-    private javax.swing.JButton addAccommBtn;
-    private javax.swing.JButton addCustomerBtn;
-    private javax.swing.JButton addPaymentBtn;
-    private javax.swing.JButton addReservationBtn;
-    private javax.swing.JButton addRoomOrCategoryBtn;
-    private javax.swing.JButton addService;
-    private javax.swing.JPanel buttonsPnl;
-    private javax.swing.JButton cancelReservationBtn;
-    private javax.swing.JButton changeDateBtn;
-    private javax.swing.JPanel controlsPnl;
-    private javax.swing.JButton currentDateBtn;
-    private javax.swing.JButton customerHistoryBtn;
-    private javax.swing.JScrollPane customersScroll;
-    private javax.swing.JTable customersTbl;
-    private javax.swing.JLabel dateLbl;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton loadBtn;
-    private javax.swing.JMenuBar menuBar;
-    private javax.swing.JScrollPane reservationsScroll;
-    private javax.swing.JTable reservationsTbl;
-    private javax.swing.JButton roomShowBtn;
-    private javax.swing.JButton saveBtn;
-    private javax.swing.JPanel settingsPnl;
+    javax.swing.JMenuItem aboutMenuItem;
+    javax.swing.JScrollPane accommScroll;
+    javax.swing.JTable accommTbl;
+    javax.swing.JButton addAccommBtn;
+    javax.swing.JButton addCustomerBtn;
+    javax.swing.JButton addPaymentBtn;
+    javax.swing.JButton addReservationBtn;
+    javax.swing.JButton addRoomOrCategoryBtn;
+    javax.swing.JButton addService;
+    javax.swing.JPanel buttonsPnl;
+    javax.swing.JButton cancelReservationBtn;
+    javax.swing.JButton changeDateBtn;
+    javax.swing.JPanel controlsPnl;
+    javax.swing.JButton currentDateBtn;
+    javax.swing.JButton customerHistoryBtn;
+    javax.swing.JScrollPane customersScroll;
+    javax.swing.JTable customersTbl;
+    javax.swing.JLabel dateLbl;
+    javax.swing.JMenuItem exitMenuItem;
+    javax.swing.JMenu fileMenu;
+    javax.swing.JMenu helpMenu;
+    javax.swing.JButton jButton1;
+    javax.swing.JButton loadBtn;
+    javax.swing.JMenuBar menuBar;
+    javax.swing.JScrollPane reservationsScroll;
+    javax.swing.JTable reservationsTbl;
+    javax.swing.JButton roomShowBtn;
+    javax.swing.JButton saveBtn;
+    javax.swing.JPanel settingsPnl;
     // End of variables declaration//GEN-END:variables
 
     private void dateTimeCounter() {
@@ -571,7 +573,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void cancelReservationAction() {
-        int reservationTableIndex = getRow(reservationsTbl, "Nie je vybraná žiadna rezervácia z tabuľky!");
+        int reservationTableIndex = getRow(reservationsTbl, java.util.ResourceBundle.getBundle("Bundle").getString("NIE JE VYBRANÁ ŽIADNA REZERVÁCIA Z TABUĽKY!"));
         if (reservationTableIndex == -1) {
             return;
         }
@@ -581,15 +583,15 @@ public class MainWindow extends javax.swing.JFrame {
         if (hotel.removeReservation(reservation)) {
             updateAll();
             JOptionPane.showMessageDialog(rootPane,
-                    "Rezervácia bola úspešne zmazaná",
-                    "Zmazaná rezervácia", JOptionPane.INFORMATION_MESSAGE);
-            logger.info("Reservation canceled");
+                    java.util.ResourceBundle.getBundle("Bundle").getString("REZERVÁCIA BOLA ÚSPEŠNE ZMAZANÁ"),
+                    java.util.ResourceBundle.getBundle("Bundle").getString("ZMAZANÁ REZERVÁCIA"), JOptionPane.INFORMATION_MESSAGE);
+            logger.info("Reservation canceled"); //NOI18N
         } else {
             updateAll();
             JOptionPane.showMessageDialog(rootPane,
-                    "Nemožno zmazať rezerváciu!",
-                    "Chyba!", JOptionPane.ERROR_MESSAGE);
-            logger.info("Unable to cancel reservation");
+                    java.util.ResourceBundle.getBundle("Bundle").getString("NEMOŽNO ZMAZAŤ REZERVÁCIU!"),
+                    java.util.ResourceBundle.getBundle("Bundle").getString("CHYBA!"), JOptionPane.ERROR_MESSAGE);
+            logger.info("Unable to cancel reservation"); //NOI18N
         }
     }
 
@@ -598,7 +600,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addPaymentAction() {
-        int accommTableIndex = getRow(accommTbl, "Nie je vybraný žiadne nezaplatené ubytovanie z tabuľky!");
+        int accommTableIndex = getRow(accommTbl, java.util.ResourceBundle.getBundle("Bundle").getString("NIE JE VYBRANÝ ŽIADNE NEZAPLATENÉ UBYTOVANIE Z TABUĽKY!"));
         if (accommTableIndex == -1) {
             return;
         }
@@ -609,7 +611,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void customerHistoryAction() {
-        int customerTableIndex = getRow(customersTbl, "Nie je vybraný žiaden zákazník z tabuľky!");
+        int customerTableIndex = getRow(customersTbl, java.util.ResourceBundle.getBundle("Bundle").getString("NIE JE VYBRANÝ ŽIADEN ZÁKAZNÍK Z TABUĽKY!"));
         if (customerTableIndex == -1) {
             return;
         }
@@ -624,20 +626,20 @@ public class MainWindow extends javax.swing.JFrame {
     private void changeDateAction() {
 //        setCustomTimeDate();
         String dateString = JOptionPane.showInputDialog(rootPane,
-                "Zadajte dátum vo formáte dd.MM.yyyy HH:mm:ss",
-                "Vlastný dátum", JOptionPane.QUESTION_MESSAGE);
+                java.util.ResourceBundle.getBundle("Bundle").getString("ZADAJTE DÁTUM VO FORMÁTE DD.MM.YYYY HH:MM:SS"),
+                java.util.ResourceBundle.getBundle("Bundle").getString("VLASTNÝ DÁTUM"), JOptionPane.QUESTION_MESSAGE);
         Date inputDate;
         try {
             inputDate = sdfTimeDate.parse(dateString);
             diffInMillies = inputDate.getTime() - realDateApp.getTime();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane,
-                    "Nesprávny formát dátumu",
-                    "Chyba!", JOptionPane.ERROR_MESSAGE);
-            logger.warn("Wrong date format");
+                    java.util.ResourceBundle.getBundle("Bundle").getString("NESPRÁVNY FORMÁT DÁTUMU"),
+                    java.util.ResourceBundle.getBundle("Bundle").getString("CHYBA!"), JOptionPane.ERROR_MESSAGE);
+            logger.warn("Wrong date format"); //NOI18N
             return;
         }
-        logger.info("Date changed");
+        logger.info("Date changed"); //NOI18N
         customDate = true;
         updateAll();
     }
@@ -654,7 +656,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void currentDateAction() {
         customDate = false;
-        logger.info("Real time loaded");
+        logger.info("Real time loaded"); //NOI18N
     }
 
     public void updateAll() {
@@ -745,7 +747,7 @@ public class MainWindow extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane,
                     message,
-                    "Chyba!", JOptionPane.ERROR_MESSAGE);
+                    java.util.ResourceBundle.getBundle("Bundle").getString("CHYBA!"), JOptionPane.ERROR_MESSAGE);
         }
         return -1;
     }
@@ -758,7 +760,7 @@ public class MainWindow extends javax.swing.JFrame {
         try {
             Thread.sleep(150);
         } catch (InterruptedException ex) {
-            logger.fatal("Current time unavailable");
+            logger.fatal("Current time unavailable"); //NOI18N
         }
         return currentDateApp;
     }
@@ -768,7 +770,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void addServiceAction() {
-        int accommTableIndex = getRow(accommTbl, "Nie je vybraný žiadne nezaplatené ubytovanie z tabuľky!");
+        int accommTableIndex = getRow(accommTbl, java.util.ResourceBundle.getBundle("Bundle").getString("NIE JE VYBRANÝ ŽIADNE NEZAPLATENÉ UBYTOVANIE Z TABUĽKY!"));
         if (accommTableIndex == -1) {
             return;
         }

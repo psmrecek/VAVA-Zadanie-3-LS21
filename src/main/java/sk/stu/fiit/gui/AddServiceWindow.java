@@ -15,9 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.inputs.InputProcessor;
 import sk.stu.fiit.logic.Accommodation;
-import sk.stu.fiit.logic.Category;
 import sk.stu.fiit.logic.Hotel;
-import sk.stu.fiit.logic.Payment;
 import sk.stu.fiit.logic.Service;
 
 /**
