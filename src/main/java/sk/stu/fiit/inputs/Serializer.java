@@ -11,6 +11,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import org.apache.log4j.Logger;
+import sk.stu.fiit.gui.MainWindow;
 import sk.stu.fiit.logic.Hotel;
 
 /**
@@ -19,6 +21,8 @@ import sk.stu.fiit.logic.Hotel;
  */
 public class Serializer {
     
+    private static final Logger logger = Logger.getLogger(Serializer.class.getName());
+    
     public static void serialize(Hotel hotel) {
         try {
             FileOutputStream fileOut = new FileOutputStream("outputs/data.out");
@@ -26,10 +30,10 @@ public class Serializer {
             out.writeObject(hotel);
             out.close();
             fileOut.close();
-            System.out.println("Uspesne serializovane");
-            System.out.println("Serialized data is saved in outputs/data.out");
+            logger.info("Serialized data is saved in outputs/data.out");
         } catch (IOException i) {
             i.printStackTrace();
+            logger.error("Unable to serialize");
         }
     }
 
@@ -40,14 +44,13 @@ public class Serializer {
             Hotel hotel = (Hotel) in.readObject();
             in.close();
             fileIn.close();
-            System.out.println("Uspesne deserializovane");
+            logger.info("Data deserialized correctly");
             return hotel;
         } catch (IOException i) {
-//            i.printStackTrace();
+            logger.info("Unable to deserialize data");
             return null;
         } catch (ClassNotFoundException c) {
-            System.out.println("Hotel class not found");
-//            c.printStackTrace();
+            logger.info("Unable to deserialize data");
             return null;
         }
     }

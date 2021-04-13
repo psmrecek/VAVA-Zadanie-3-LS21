@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.inputs.InputProcessor;
 import sk.stu.fiit.logic.*;
 
@@ -26,6 +27,9 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
     /**
      * Creates new form Buttons
      */
+    
+    private static final Logger logger = Logger.getLogger(AddCategoryRoomServiceWindow.class.getName());
+    
     private Hotel hotel;
     private ArrayList<String> listCategoriesNames;
     private ArrayList<Category> listCategories;
@@ -514,6 +518,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
             price = InputProcessor.validPriceFromString(servicePriceTf.getText());
         } catch (Exception e) {
             errorPane("Pole Cena musí byť nezáporné číslo!");
+            logger.warn("Wrong price");
             return;
         }
         
@@ -522,6 +527,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
         serviceNameTf.setText("");
         servicePriceTf.setText("");
         refreshAll();
+        logger.info("New service added");
     }//GEN-LAST:event_addServiceBtnMouseReleased
 
     private void addCategoryBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCategoryBtnMouseReleased
@@ -544,6 +550,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
             price = InputProcessor.validPriceFromString(catPriceTf.getText());
         } catch (Exception e) {
             errorPane("Pole Cena musí byť nezáporné číslo!");
+            logger.warn("Wrong price");
             return;
         }
         
@@ -554,6 +561,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
         catNoteTf.setText("");
         catPriceTf.setText("");
         refreshAll();
+        logger.info("New category added");
     }//GEN-LAST:event_addCategoryBtnMouseReleased
 
     private void addRoomBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addRoomBtnMouseReleased
@@ -601,6 +609,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
         listImages.clear();
         currentImageId = -1;
         setImage(0);
+        logger.info("New room added");
     }//GEN-LAST:event_addRoomBtnMouseReleased
 
     private void okBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_okBtnMouseReleased
@@ -632,6 +641,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,
                     "Vybraný súbor nie je možné použiť ako logo!",
                     "Chyba!", JOptionPane.ERROR_MESSAGE);
+            logger.warn("Wrong image selected");
             return;
         }
     }//GEN-LAST:event_addImageBtnMouseReleased

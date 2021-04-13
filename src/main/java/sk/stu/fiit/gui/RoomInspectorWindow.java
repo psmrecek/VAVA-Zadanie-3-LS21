@@ -11,6 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.inputs.InputProcessor;
 import sk.stu.fiit.logic.Accommodation;
 import sk.stu.fiit.logic.Category;
@@ -23,11 +24,12 @@ import sk.stu.fiit.logic.Room;
  *
  * @author PeterSmrecek
  */
-public class HotelManagementWindow extends javax.swing.JFrame {
+public class RoomInspectorWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form CustomerHistoriWindow
      */
+    private static final Logger logger = Logger.getLogger(RoomInspectorWindow.class.getName());
     
     private Hotel hotel;
     private SimpleDateFormat sdfRoom = new SimpleDateFormat("dd.MM.yyyy HH:mm");
@@ -40,7 +42,7 @@ public class HotelManagementWindow extends javax.swing.JFrame {
     private ArrayList<ImageIcon> listImages = new ArrayList<>();
     private int currentImageId = -1;
     
-    public HotelManagementWindow(Hotel hotel) {
+    public RoomInspectorWindow(Hotel hotel) {
         initComponents();
         this.hotel = hotel;
         

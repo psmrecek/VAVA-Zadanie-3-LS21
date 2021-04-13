@@ -255,7 +255,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         controlsPnl.add(reservationsScroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 1320, 200));
 
-        accommScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka ubytovaní", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        accommScroll.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tabuľka nezaplatených ubytovaní", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         accommScroll.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         accommTbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -264,7 +264,7 @@ public class MainWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Zákazník", "Izba", "Od", "Do", "Zaplatené"
+                "Zákazník", "Izba", "Od", "Do", "Ukončené"
             }
         ) {
             Class[] types = new Class [] {
@@ -555,17 +555,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JPanel settingsPnl;
     // End of variables declaration//GEN-END:variables
-    
-    private void setCustomTimeDate() {
-        try {
-            Date startDate = sdfTimeDate.parse("05.12.1996 2:36:42");
-            customCalendar.setTime(startDate);
-            customDate = true;
-        } catch (ParseException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
+
     private void dateTimeCounter() {
         int behCyklus = 1;
 
@@ -576,16 +566,7 @@ public class MainWindow extends javax.swing.JFrame {
                 while (behCyklus == 1) {
                     
                     if (customDate) {
-//                        currentDateApp = customCalendar.getTime();
-//                        dateLbl.setText(sdfTimeDate.format(getCurrentDateApp()));
-//
-//                        try {
-//                            Thread.sleep(1000);
-//                            customCalendar.setTimeInMillis(customCalendar.getTimeInMillis() + 1000);
-////                        System.out.println("Spal som 1000");
-//                        } catch (InterruptedException ex) {
-//                            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
+
                         Calendar realCalendar = new GregorianCalendar();
                         realDateApp = realCalendar.getTime();
                         Date millis = new Date(realCalendar.getTimeInMillis() + diffInMillies);
@@ -595,7 +576,6 @@ public class MainWindow extends javax.swing.JFrame {
 
                         try {
                             Thread.sleep(100);
-//                        System.out.println("Spal som 1000");
                         } catch (InterruptedException ex) {
                             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -608,21 +588,9 @@ public class MainWindow extends javax.swing.JFrame {
                         
                         try {
                             Thread.sleep(100);
-//                        System.out.println("Spal som 1000");
                         } catch (InterruptedException ex) {
                             java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                        
-//                        int day = calendar1.get(Calendar.DATE);
-//                        int month = calendar1.get(Calendar.MONTH) + 1;
-//                        int year = calendar1.get(Calendar.YEAR);
-//
-//                        int hour = calendar1.get(Calendar.HOUR);
-//                        int minute = calendar1.get(Calendar.MINUTE);
-//                        int second = calendar1.get(Calendar.SECOND);
-
-//                        dateLbl.setText(String.format("%02d", day) + ". " + String.format("%02d", month) + ". " + String.format("%04d", year));
-//                        timeLbl.setText(String.format("%02d", hour) + ":" + String.format("%02d", minute) + ":" + String.format("%02d", second));
                     }
                 }
             }
@@ -651,11 +619,13 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,
                     "Rezervácia bola úspešne zmazaná",
                     "Zmazaná rezervácia", JOptionPane.INFORMATION_MESSAGE);
+            logger.info("Reservation canceled");
         } else {
             updateAll();
             JOptionPane.showMessageDialog(rootPane,
                     "Nemožno zmazať rezerváciu!",
                     "Chyba!", JOptionPane.ERROR_MESSAGE);
+            logger.info("Unable to cancel reservation");
         }
     }
 
@@ -684,7 +654,7 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     private void roomShowAction() {
-        new HotelManagementWindow(hotel).setVisible(true);
+        new RoomInspectorWindow(hotel).setVisible(true);
     }
 
     private void changeDateAction() {
@@ -700,9 +670,10 @@ public class MainWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,
                     "Nesprávny formát dátumu",
                     "Chyba!", JOptionPane.ERROR_MESSAGE);
+            logger.warn("Wrong date format");
             return;
         }
-        
+        logger.info("Date changed");
         customDate = true;
         updateAll();
     }
@@ -715,13 +686,14 @@ public class MainWindow extends javax.swing.JFrame {
         hotel = Serializer.deserialize();
         if (hotel == null) {
             hotel = new Hotel();
+            logger.info("New hotel created");
             InputsCreator.createInputs(hotel);
-            System.out.println("Teraz sa nacitali cisto nove vstupy");
         }
     }
 
     private void currentDateAction() {
         customDate = false;
+        logger.info("Real time loaded");
     }
 
     public void updateAll() {
@@ -786,10 +758,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void populateAccommTbl() {
         DefaultTableModel model = (DefaultTableModel) accommTbl.getModel();
         deleteRows(model);
-
+        
         int numberOfColumns = accommTbl.getColumnCount();
         Object[] rowData = new Object[numberOfColumns];
         ArrayList<Accommodation> list = hotel.getListAccommodationsUnpaid();
+        Date currentDateTbl = getCurrentDateApp();
 
         for (int i = 0; i < list.size(); i++) {
 
@@ -797,6 +770,7 @@ public class MainWindow extends javax.swing.JFrame {
             rowData[1] = list.get(i).getRoom().getName();
             rowData[2] = sdfRoom.format(list.get(i).getStartDate());
             rowData[3] = sdfRoom.format(list.get(i).getEndDate());
+            rowData[4] = currentDateTbl.after(list.get(i).getEndDate());
 
             model.addRow(rowData);
         }
@@ -823,7 +797,7 @@ public class MainWindow extends javax.swing.JFrame {
         try {
             Thread.sleep(150);
         } catch (InterruptedException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+            logger.fatal("Current time unavailable");
         }
         return currentDateApp;
     }

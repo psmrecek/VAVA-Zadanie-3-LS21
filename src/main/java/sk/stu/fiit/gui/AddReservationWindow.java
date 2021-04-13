@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.inputs.InputProcessor;
 import sk.stu.fiit.logic.Category;
 import sk.stu.fiit.logic.Customer;
@@ -24,7 +25,9 @@ import sk.stu.fiit.logic.Room;
  * @author PeterSmrecek
  */
 public class AddReservationWindow extends javax.swing.JFrame {
-
+    
+    private static final Logger logger = Logger.getLogger(AddReservationWindow.class.getName());
+    
     private Hotel hotel;
     private MainWindow mainWindow;
     
@@ -477,6 +480,7 @@ public class AddReservationWindow extends javax.swing.JFrame {
         }
         
         mainWindow.updateAll();
+        logger.info("New reservation added");
         this.dispose();
     }//GEN-LAST:event_newReservationBtnMouseReleased
 
@@ -720,6 +724,7 @@ public class AddReservationWindow extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,
                     "Nesprávny formát dátumu. Zadajte dátum vo formáte dd.MM.yyyy.",
                     "Chyba!", JOptionPane.ERROR_MESSAGE);
+            logger.warn("Wrong date format");
             return;
         }
         

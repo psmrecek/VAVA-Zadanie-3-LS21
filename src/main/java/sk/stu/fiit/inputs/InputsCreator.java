@@ -6,15 +6,13 @@
 package sk.stu.fiit.inputs;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import org.apache.log4j.Logger;
+import sk.stu.fiit.gui.MainWindow;
 import sk.stu.fiit.logic.*;
 
 /**
@@ -23,8 +21,7 @@ import sk.stu.fiit.logic.*;
  */
 public class InputsCreator {
     
-    
-
+    private static final Logger logger = Logger.getLogger(InputsCreator.class.getName());
     
     public static void createInputs(Hotel hotel){
         
@@ -85,11 +82,11 @@ public class InputsCreator {
             li4.add(InputProcessor.resize(img8, size));
             li4.add(InputProcessor.resize(img9, size));
             
-            System.out.println("++++++++++++++++Obrazky sa nacitali v poriadku");
+            logger.info("Images loaded correctly");
             
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("----------------Nacitanie obrazkov zlyhalo");
+            logger.error("Images loaded incorrectly");
         }
 
         Room r1 = new Room("PR-001", "Pekná izba", cat1, li1);
@@ -122,24 +119,28 @@ public class InputsCreator {
             hotel.addAccommodation(ac2);
             hotel.addAccommodation(ac4);
             hotel.addAccommodation(ac5);
-            hotel.addAccommodation(ac6);
-            
+            hotel.addAccommodation(ac6);    
+        } catch (ParseException ex) {
+            logger.error("Unable to create accommodations");
+        }
+        
+        try {
             Reservation res1 = new Reservation(c1, r1, sdf.parse("1.5.2021 10:00"), sdf.parse("7.5.2021 9:00"));
             Reservation res2 = new Reservation(c1, r2, sdf.parse("1.6.2021 10:00"), sdf.parse("7.6.2021 9:00"));
             Reservation res3 = new Reservation(c2, r3, sdf.parse("1.7.2021 10:00"), sdf.parse("7.7.2021 9:00"));
             Reservation res4 = new Reservation(c3, r4, sdf.parse("1.7.2021 10:00"), sdf.parse("7.7.2021 9:00"));
             Reservation res5 = new Reservation(c1, r1, sdf.parse("1.7.2021 10:00"), sdf.parse("7.7.2021 9:00"));
             Reservation res6 = new Reservation(c1, r4, sdf.parse("1.8.2021 10:00"), sdf.parse("14.8.2021 9:00"));
-            
+
             hotel.addReservation(res3);
             hotel.addReservation(res1);
             hotel.addReservation(res2);
             hotel.addReservation(res4);
             hotel.addReservation(res5);
             hotel.addReservation(res6);
-            
+
         } catch (ParseException ex) {
-            System.out.println("Nedokazal som vytvorit Accommodation");
+            logger.error("Unable to create reservations");
         }
         
     }

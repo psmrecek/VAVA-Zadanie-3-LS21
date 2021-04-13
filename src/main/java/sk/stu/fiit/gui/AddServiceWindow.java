@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.log4j.Logger;
 import sk.stu.fiit.inputs.InputProcessor;
 import sk.stu.fiit.logic.Accommodation;
 import sk.stu.fiit.logic.Category;
@@ -28,6 +29,9 @@ public class AddServiceWindow extends javax.swing.JFrame {
     /**
      * Creates new form Buttons
      */
+    
+    private static final Logger logger = Logger.getLogger(AddServiceWindow.class.getName());
+    
     private Accommodation accommodation;
     private SimpleDateFormat sdfRoom = new SimpleDateFormat("dd.MM.yyyy HH:mm");
     private double total = 0;
@@ -438,6 +442,7 @@ public class AddServiceWindow extends javax.swing.JFrame {
         Service service = listServices.get(index);
         
         accommodation.addService(service);
+        logger.info("Added service to accommodation");
         updateAll();
     }//GEN-LAST:event_addServiceBtnMouseReleased
 

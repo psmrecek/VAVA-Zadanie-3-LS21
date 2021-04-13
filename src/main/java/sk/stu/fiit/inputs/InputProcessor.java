@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import org.apache.log4j.Logger;
+import sk.stu.fiit.gui.MainWindow;
 import sk.stu.fiit.logic.IName;
 
 /**
@@ -18,7 +20,9 @@ import sk.stu.fiit.logic.IName;
  * @author PeterSmrecek
  */
 public final class InputProcessor {
-
+    
+    private static final Logger logger = Logger.getLogger(InputProcessor.class.getName());
+    
     private InputProcessor() {
     }
     

@@ -385,7 +385,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Tabu&#x13e;ka ubytovan&#xed;">
+                <TitledBorder title="Tabu&#x13e;ka nezaplaten&#xfd;ch ubytovan&#xed;">
                   <Font PropertyName="font" name="Segoe UI" size="14" style="0"/>
                 </TitledBorder>
               </Border>
@@ -416,7 +416,7 @@
                     <Column editable="false" title="Izba" type="java.lang.Object"/>
                     <Column editable="false" title="Od" type="java.lang.Object"/>
                     <Column editable="false" title="Do" type="java.lang.Object"/>
-                    <Column editable="false" title="Zaplaten&#xe9;" type="java.lang.Boolean"/>
+                    <Column editable="false" title="Ukon&#x10d;en&#xe9;" type="java.lang.Boolean"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
