@@ -345,7 +345,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
         roomPnl.add(roomNameTf, gridBagConstraints);
 
         roomNameLbl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        roomNameLbl.setText("Meno");
+        roomNameLbl.setText("Číslo izby");
         roomNameLbl.setMinimumSize(new java.awt.Dimension(200, 20));
         roomNameLbl.setPreferredSize(new java.awt.Dimension(200, 20));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -603,7 +603,7 @@ public class AddCategoryRoomServiceWindow extends javax.swing.JFrame {
 
         Category category = listCategories.get(index);
         
-        Room room = new Room(info, name, category, listImages);
+        Room room = new Room(name, info, category, listImages);
         roomNameTf.setText("");
         roomNoteTf.setText("");
         listImages.clear();

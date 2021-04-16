@@ -5,6 +5,7 @@
  */
 package sk.stu.fiit.gui;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -514,6 +515,17 @@ public class AddServiceWindow extends javax.swing.JFrame {
     private void updateAll() {
         Date start = accommodation.getStartDate();
         Date end = accommodation.getEndDate();
+        
+        Date startWithoutTime = null;
+        Date endWithoutTime = null;
+        try {
+            startWithoutTime = InputProcessor.dateWithoutTime(start);
+            endWithoutTime = InputProcessor.dateWithoutTime(end);
+
+        } catch (ParseException ex) {
+            logger.error("Unable to count number of nights");
+        }
+        
         long diffInMillies = Math.abs(end.getTime() - start.getTime());
         int diffInDays = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         double nightPrice = accommodation.getRoom().getCategory().getPrice();

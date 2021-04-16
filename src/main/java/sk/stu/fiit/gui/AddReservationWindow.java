@@ -469,6 +469,18 @@ public class AddReservationWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         countForRoom();
+        
+        Date currentDateApp = mainWindow.getCurrentDateApp();
+        if (!InputProcessor.validDateRange(currentDateApp, accommStartDate, accommEndDate)) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Dátum začiatku ubytovania musí byť väčší ako súčasný dátum "
+                            + "nastavený v aplikácií ( "+sdfCreate.format(currentDateApp)+" ) "
+                                    + "a dátum konca ubytovania musí byť väčší "
+                                    + "ako dátum začiatku ubytovania!",
+                    "Chyba!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (hotel.available(accommStartDate, accommEndDate, accommRoom)) {
             Reservation reservation = new Reservation(accommCustomer, accommRoom, accommStartDate, accommEndDate);
             hotel.addReservation(reservation);
@@ -747,6 +759,6 @@ public class AddReservationWindow extends javax.swing.JFrame {
         
         accommRoom = room;
         accommStartDate = InputProcessor.dateStart(start);
-        accommEndDate = InputProcessor.dateStart(end);
+        accommEndDate = InputProcessor.dateEnd(end);
     }
 }

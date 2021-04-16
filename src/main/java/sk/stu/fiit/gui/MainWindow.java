@@ -656,6 +656,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void currentDateAction() {
         customDate = false;
+        updateAll();
         logger.info("Real time loaded"); //NOI18N
     }
 

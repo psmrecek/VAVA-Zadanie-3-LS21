@@ -118,6 +118,9 @@ public class Hotel implements Serializable {
                 if (accommEndDate.after(start) && accommEndDate.before(end)) {
                     return false;
                 }
+                if (accommStartDate.equals(start) || accommEndDate.equals(end)) {
+                    return false;
+                }
             }
         }
         return true;

@@ -182,12 +182,19 @@ public class CustomerHistoryWindow extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Izba", "Od", "Do", "Služby", "Suma"
+                "Izba", "Od", "Do", "Služby", "Suma", "V hotovosti"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -196,6 +203,9 @@ public class CustomerHistoryWindow extends javax.swing.JFrame {
         accommTbl.setMinimumSize(new java.awt.Dimension(375, 260));
         accommTbl.getTableHeader().setReorderingAllowed(false);
         accommScroll.setViewportView(accommTbl);
+        if (accommTbl.getColumnModel().getColumnCount() > 0) {
+            accommTbl.getColumnModel().getColumn(5).setMaxWidth(100);
+        }
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -299,8 +309,10 @@ public class CustomerHistoryWindow extends javax.swing.JFrame {
             rowData[3] = list.get(i).getServicesString();
             if (list.get(i).getPayment() != null) {
                 rowData[4] = list.get(i).getPayment().getTotal().toString();
+                rowData[5] = list.get(i).getPayment().isCash();
             } else {
                 rowData[4] = "Nezaplatené";
+                rowData[5] = false;
             }
             model.addRow(rowData);
         }

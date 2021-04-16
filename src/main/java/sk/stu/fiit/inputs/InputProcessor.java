@@ -7,9 +7,12 @@ package sk.stu.fiit.inputs;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
 import javax.swing.ImageIcon;
 import org.apache.log4j.Logger;
 import sk.stu.fiit.logic.IName;
@@ -98,14 +101,37 @@ public final class InputProcessor {
     public static Date dateStart(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR_OF_DAY, 9);
+        calendar.add(Calendar.HOUR_OF_DAY, 10);
         return calendar.getTime();
     }
     
     public static Date dateEnd(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.add(Calendar.HOUR_OF_DAY, 10);
+        calendar.add(Calendar.HOUR_OF_DAY, 9);
         return calendar.getTime();
     }
+    
+    public static Date dateWithoutTime(Date date) throws ParseException{
+        SimpleDateFormat sdfCreate = new SimpleDateFormat("dd.MM.yyyy");
+        String dateString = sdfCreate.format(date);
+        Date dateWihoutTime = null;
+        
+        dateWihoutTime = sdfCreate.parse(dateString);
+        
+        return dateWihoutTime;
+    }
+    
+    public static boolean validDateRange(Date currentDateApp, Date accommStartDate, Date accommEndDate) {
+        Date currWihoutTime = null;
+        try {
+            currWihoutTime = dateWithoutTime(currentDateApp);
+        } catch (ParseException ex) {
+            logger.error("Unable to convert date");
+            return false;
+        }
+        return (accommStartDate.after(currWihoutTime) && accommEndDate.after(accommStartDate));
+    }
+    
+    
 }

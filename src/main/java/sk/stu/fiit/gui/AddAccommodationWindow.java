@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
@@ -526,6 +527,18 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
 
     private void newAccommBtnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newAccommBtnMouseReleased
         // TODO add your handling code here:
+        
+        Date currentDateApp = mainWindow.getCurrentDateApp();
+        if (!InputProcessor.validDateRange(currentDateApp, accommStartDate, accommEndDate)) {
+            JOptionPane.showMessageDialog(rootPane,
+                    "Dátum začiatku ubytovania musí byť väčší ako súčasný dátum "
+                            + "nastavený v aplikácií ( "+sdfCreate.format(currentDateApp)+" ) "
+                                    + "a dátum konca ubytovania musí byť väčší "
+                                    + "ako dátum začiatku ubytovania!",
+                    "Chyba!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         if (withResRb.isSelected()) {
             if (accommReservation != null) {
                 hotel.removeReservation(accommReservation);
@@ -797,7 +810,18 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         
         Date start = reservation.getStartDate();
         Date end = reservation.getEndDate();
-        long diffInMillies = Math.abs(end.getTime() - start.getTime());
+        
+        Date startWithoutTime = null;
+        Date endWithoutTime = null;
+        try {
+            startWithoutTime = InputProcessor.dateWithoutTime(start);
+            endWithoutTime = InputProcessor.dateWithoutTime(end);
+
+        } catch (ParseException ex) {
+            logger.error("Unable to count number of nights");
+        }
+        
+        long diffInMillies = Math.abs(endWithoutTime.getTime() - startWithoutTime.getTime());
         int diffInDays = (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
         double nightPrice = category.getPrice();
         double originalPrice = nightPrice * diffInDays;
@@ -910,7 +934,7 @@ public class AddAccommodationWindow extends javax.swing.JFrame {
         
         accommRoom = room;
         accommStartDate = InputProcessor.dateStart(start);
-        accommEndDate = InputProcessor.dateStart(end);
+        accommEndDate = InputProcessor.dateEnd(end);
     }
 
     private void withResAction() {
