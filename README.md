@@ -1,4 +1,4 @@
-# VAVA-Zadanie-3
+# VAVA-Zadanie-3 Informačný systém pre hotel (Booking v2)
 
 ## Popis zadania
 
